@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omicscanvas"
+version = "0.1.0"
+description = "OmicsCanvas: a script-first multi-omics processing and visualization pipeline."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{name = "zeyu zhang"}]
+license = {text = "MIT"}
+keywords = ["bioinformatics", "omics", "visualization", "ChIP-seq", "WGBS", "ATAC-seq"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "seaborn",
+  "scipy",
+  "scikit-learn",
+  "statsmodels",
+]
+
+[project.scripts]
+omicscanvas = "omicscanvas.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["omicscanvas"]
+
+[tool.setuptools.package-data]
+omicscanvas = ["steps/*.py"]
