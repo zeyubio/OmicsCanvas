@@ -250,6 +250,19 @@ python scripts/omicscanvas_gene_circle_plot.py \
   --circle-meth-layout combined \
   --out results/candidate_gene_circle.png
 ```
+
+<div align="center">
+  <h2>⭕ Interactive Gene Circular Visualization</h2>
+  <img src="./images/fig5_circle_gene_track_3D.png" width="600px" alt="Circular Gene Track">
+  <br>
+  <p align="center" style="width: 80%;">
+    <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
+    <i>This circular coordinate framework maps multi-layer regulatory data (e.g., ChIP-seq signals and RNA-seq expression) onto an angular axis. It provides a compact yet comprehensive view of the epigenetic landscape and transcriptional activity for a specific candidate gene.</i>
+  </p>
+</div>
+
+
+
 ### 📚 Citation
 If you use OmicsCanvas in your research, please cite:
 
