@@ -182,6 +182,27 @@ python scripts/omicscanvas_histone_cluster_pipeline.py \
 </table>
 
 
+<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_TSS.png" width="100%">
+      <br>
+      <p><i>Sample 1: H3K4me1 H3K4me3 TSS cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_genebody.png" width="100%">
+      <br>
+      <p><i>Sample 2: H3K4me1 H3K4me3 Genebody cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_TES.png" width="100%">
+      <br>
+      <p><i>Sample 3: H3K4me1 H3K4me3 TES cluster heatmap Signal</i></p>
+    </td>
+  </tr>
+</table>
+
+
 
 ### 4. Single Gene Visualization (Pseudo-3D)
 Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.
