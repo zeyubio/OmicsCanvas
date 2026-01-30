@@ -68,7 +68,7 @@ python scripts/02_prepare_cx_context_split.py \
   -i meth/sample_1_bismark_hisat2.CX_report.txt \
   -p sample \
   -d meth_data
-‵‵`
+```
 
 Output: This script generates three context-specific files in the designated directory:
 sample_CG.CX,sample_CHG.CX,sample_CHH.CX
