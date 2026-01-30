@@ -127,6 +127,26 @@ python scripts/omicscanvas_histone_vs_expr_heatmap.py \
   --out-prefix results/H3K4me3_vs_Expr
  ```
 
+<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig2_heatmap_H3K4me3_1.png" width="100%">
+      <br>
+      <p><i>Sample 1: H3K4me3 TSS Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig2_heatmap_H3K4me3_2.png" width="100%">
+      <br>
+      <p><i>Sample 2: H3K4me3 GeneBody Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig2_heatmap_H3K4me3_3.png" width="100%">
+      <br>
+      <p><i>Sample 3: H3K4me3 TES Signal</i></p>
+    </td>
+  </tr>
+</table>
+
 
 ### 3. Clustering Analysis
 Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.
