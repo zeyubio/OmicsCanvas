@@ -106,6 +106,7 @@ python scripts/omicscanvas_plot_whole_profile_2d3d.py \
   --out results/global_profile_3d.png
  ```
 ![Global 3D profile](./images/fig1_global_3D_1.png)
+<img src="./images/fig1_global_3D_1.png" width="600px">
 
 ### 2. Signal vs. Expression Heatmap
 Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density.
