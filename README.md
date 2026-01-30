@@ -105,8 +105,12 @@ python scripts/omicscanvas_plot_whole_profile_2d3d.py \
   --ylabels "H3K4me3|H3K27me3" \
   --out results/global_profile_3d.png
  ```
-![Global 3D profile](./images/fig1_global_3D_1.png)
-<img src="./images/fig1_global_3D_1.png" width="600px">
+
+<div align="center">
+  <img src="./images/fig1_global_3D_1.png" width="800px">
+  <p><b>Figure 1:</b> Global Pseudo-3D profile showing multi-omics signal distribution across the genome.</p>
+</div>
+
 
 ### 2. Signal vs. Expression Heatmap
 Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density.
