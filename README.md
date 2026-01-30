@@ -73,12 +73,11 @@ python scripts/02_prepare_cx_context_split.py \
 Output: This script generates three context-specific files in the designated directory:
 sample_CG.CX,sample_CHG.CX,sample_CHH.CX
 
-Data Format (Tab-delimited): The output files contain four essential columns for downstream matrix generation: | Column | Description | Example | | :--- | :--- | :--- | | 1 | Chromosome ID | Chr01 | | 2 | Genomic Position | 292 | | 3 | Methylated Reads Count | 1 | | 4 | Total Read Depth | 1 |
-
-Chr01   292     1       1
-Chr01   333     2       2
-Chr01   334     1       1
-Chr01   378     3       3
+Each output file is tab-delimited with 4 columns:
+1.Chromosome
+2.Position
+3.Methylated read counts
+4.Coverage / depth
 
 
 ### Step 2: Matrix Generation
