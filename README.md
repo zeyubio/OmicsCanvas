@@ -51,13 +51,11 @@ Convert your annotation (GFF3) into standard BED format and calculate gene lengt
 
 python scripts/omicscanvas_gff_to_bed_genes_length.py 
   -i annotation.gff3 \
-  --bed-feature gene \
-  --length-feature CDS \
-  --bed-zero-based \
   -o gene.bed \
   -l gene_cds_length.tsv \
-  --merge-overlaps
 ```
+
+
 
 ### Step 2: Matrix Generation
 A. For BAM Files (ChIP / ATAC / RNA)
