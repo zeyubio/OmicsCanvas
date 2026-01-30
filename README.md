@@ -54,7 +54,7 @@ python scripts/omicscanvas_gff_to_bed_genes_length.py
   -o gene.bed \
   -l gene_cds_length.tsv \
 ```
-#### C. Methylation Data Preprocessing (Bismark CX Reports)
+#### 2. Methylation Data Preprocessing (Bismark CX Reports)
 Extract and filter site-specific methylation data (CG, CHG, and CHH contexts) from Bismark CX reports.
 
 **Functionality:**
@@ -78,6 +78,18 @@ Each output file is tab-delimited with 4 columns:
 2.Position
 3.Methylated read counts
 4.Coverage / depth
+
+#### 3. Integration of Biological Replicates (Optional Step)
+Combine multiple context-specific CX files from biological replicates into a single consensus file to improve data coverage and statistical confidence.
+
+# Usage: python 03_prepare_cx_replicate_merge.py -o <Output> <Rep1> <Rep2> ...
+
+```bash
+python scripts/03_prepare_cx_replicate_merge.py \
+  -o meth_data/treatment_CG.CX \
+  meth_data/treatment_rep1_CG.CX \
+  meth_data/treatment_rep2_CG.CX
+```
 
 
 ### Step 2: Matrix Generation
