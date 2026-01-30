@@ -109,8 +109,8 @@ python scripts/omicscanvas_bam_to_gene_matrices.py \
 > **Output:** This process generates three core matrix files: `Sample_H3K4me3_tss_matrix.tsv`, `Sample_H3K4me3_gene_profile_matrix.tsv`, and `Sample_H3K4me3_tes_matrix.tsv`.
 
 
-### B. For Methylation (WGBS)
-Process Bismark CX reports into gene-centric methylation matrices.
+#### 2. For Methylation (WGBS)
+Process CX reports into gene-centric methylation matrices.
 
 ```bash
 python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data -o CX_gene
