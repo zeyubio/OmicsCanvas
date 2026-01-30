@@ -4,17 +4,18 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> **A unified framework for integrating and visualizing epigenetic, epitranscriptomic, and transcriptomic data in a gene-centric coordinate system.**
+**A gene-architecture–aware framework to align, normalize, discover patterns, and visualize multi-omics regulation in a unified “promoter–gene body–flanks” coordinate system.** :contentReference[oaicite:0]{index=0}
 
 ## 📖 Introduction
+OmicsCanvas is a Python (v3.9) toolkit for integrated analysis of transcriptomic, epigenomic, and epitranscriptomic sequencing data. It takes peak-centric assays (e.g., ChIP-seq/ATAC-seq/m6A-seq) and projects their signals onto a standardized gene-architecture model, producing interpretable gene-centric matrices and publication-ready vector figures (PDF/SVG). :contentReference[oaicite:1]{index=1}
 
-**OmicsCanvas** is a one-stop toolkit designed to bridge the gap between gene expression and diverse regulatory layers (e.g., ChIP-seq, ATAC-seq, WGBS, m6A-seq). Unlike traditional peak-centric tools, OmicsCanvas employs a **unified gene-centric coordinate framework**, decomposing genes into **promoter, body, and flanking neighborhoods**.
-
-Key capabilities include:
-* **Unified Binning:** Aligns heterogeneous signals (BAM/BigWig) and base-resolution methylation data (Bismark CX) to a shared structure.
-* **Expression Integration:** Directly links epigenomic signals with gene expression levels (TPM/FPKM).
-* **Publication-Ready Visualization:** Exports high-quality **2D, Pseudo-3D, and Circular** vector graphics.
-* **Unsupervised Learning:** Identifies cooperative or antagonistic regulatory patterns via K-means clustering.
+## 🔑 Key capabilities
+- **Standardized inputs**: sorted/indexed **BAM** tracks (RNA-seq/ChIP-seq/ATAC-seq/m6A-seq, etc.), **GFF/BED** annotations, and **Bismark CX** methylation reports. :contentReference[oaicite:2]{index=2}  
+- **Unified binning & matrix construction**: partitions each gene into body + flanks and discretizes into configurable bins (default **300**), generating unified *element × bin* signal matrices with optional library-size normalization. :contentReference[oaicite:3]{index=3}  
+- **Expression & methylation integration**: outputs TPM/FPKM/count matrices and computes bin-level **CG/CHG/CHH** methylation profiles to directly connect regulatory layers with transcriptional output. :contentReference[oaicite:4]{index=4}  
+- **Pattern discovery**: supports **K-means** to identify coordinated multi-track patterns and produce clustered heatmaps + profile summaries. :contentReference[oaicite:5]{index=5}  
+- **Publication-ready visualization**: generates genome-wide metaplots/heatmaps and single-gene plots in **2D**, **pseudo-3D**, and **circular** layouts, with group-wise shared y-axis scaling for consistent comparisons. :contentReference[oaicite:6]{index=6}  
+- **Extended modules**: includes differential expression analysis via **PyDESeq2** and supports **TE-centric** quantification when TE annotations are provided. :contentReference[oaicite:7]{index=7}  
 
 ---
 
