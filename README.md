@@ -82,8 +82,6 @@ Each output file is tab-delimited with 4 columns:
 #### 3. Integration of Biological Replicates (Optional Step)
 Combine multiple context-specific CX files from biological replicates into a single consensus file to improve data coverage and statistical confidence.
 
-# Usage: python 03_prepare_cx_replicate_merge.py -o <Output> <Rep1> <Rep2> ...
-
 ```bash
 python scripts/03_prepare_cx_replicate_merge.py \
   -o meth_data/treatment_CG.CX \
