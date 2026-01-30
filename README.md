@@ -203,6 +203,12 @@ python scripts/omicscanvas_histone_cluster_pipeline.py \
 </table>
 
 
+<div align="center">
+  <img src="./images/fig3_cluster_boxplot.png" width="600px">
+  <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
+  <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
+</div>
+
 
 ### 4. Single Gene Visualization (Pseudo-3D)
 Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.
