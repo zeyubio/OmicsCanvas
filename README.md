@@ -4,10 +4,10 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**A gene-architecture–aware framework to align, normalize, discover patterns, and visualize multi-omics regulation in a unified “promoter–gene body–flanks” coordinate system.** :contentReference[oaicite:0]{index=0}
+**A gene-architecture–aware framework to align, normalize, discover patterns, and visualize multi-omics regulation in a unified “promoter–gene body–flanks” coordinate system.** 
 
 ## 📖 Introduction
-OmicsCanvas is a Python (v3.9) toolkit for integrated analysis of transcriptomic, epigenomic, and epitranscriptomic sequencing data. It takes peak-centric assays (e.g., ChIP-seq/ATAC-seq/m6A-seq) and projects their signals onto a standardized gene-architecture model, producing interpretable gene-centric matrices and publication-ready vector figures (PDF/SVG). :contentReference[oaicite:1]{index=1}
+OmicsCanvas is a Python (v3.9) toolkit for integrated analysis of transcriptomic, epigenomic, and epitranscriptomic sequencing data. It takes peak-centric assays (e.g., ChIP-seq/ATAC-seq/m6A-seq) and projects their signals onto a standardized gene-architecture model, producing interpretable gene-centric matrices and publication-ready vector figures (PDF/SVG).
 
 ## 🔑 Key capabilities
 - **Standardized inputs**: sorted/indexed **BAM** tracks (RNA-seq/ChIP-seq/ATAC-seq/m6A-seq, etc.), **GFF/BED** annotations, and **Bismark CX** methylation reports.  
