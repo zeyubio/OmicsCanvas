@@ -46,7 +46,7 @@ The OmicsCanvas workflow consists of three main stages: Preparation, Matrix Calc
 
 
 ### Step 1: Preparation
-Convert your annotation (GFF3) into standard BED format and calculate gene lengths.
+#### 1.Convert your annotation (GFF3) into standard BED format and calculate gene lengths.
 ```bash
 
 python scripts/omicscanvas_gff_to_bed_genes_length.py 
@@ -54,7 +54,31 @@ python scripts/omicscanvas_gff_to_bed_genes_length.py
   -o gene.bed \
   -l gene_cds_length.tsv \
 ```
+#### C. Methylation Data Preprocessing (Bismark CX Reports)
+Extract and filter site-specific methylation data (CG, CHG, and CHH contexts) from Bismark CX reports.
 
+**Functionality:**
+* Splits the global CX report into context-specific files (`CG`, `CHG`, `CHH`).
+* Filters out high-depth noise (default threshold: depth > 300).
+* Removes non-methylated sites (methylation count = 0) to reduce data redundancy.
+
+```bash
+# Extract and split methylation contexts
+python scripts/02_prepare_cx_context_split.py \
+  -i meth/sample_1_bismark_hisat2.CX_report.txt \
+  -p sample \
+  -d meth_data
+‵‵`
+
+Output: This script generates three context-specific files in the designated directory:
+sample_CG.CX,sample_CHG.CX,sample_CHH.CX
+
+Data Format (Tab-delimited): The output files contain four essential columns for downstream matrix generation: | Column | Description | Example | | :--- | :--- | :--- | | 1 | Chromosome ID | Chr01 | | 2 | Genomic Position | 292 | | 3 | Methylated Reads Count | 1 | | 4 | Total Read Depth | 1 |
+
+Chr01   292     1       1
+Chr01   333     2       2
+Chr01   334     1       1
+Chr01   378     3       3
 
 
 ### Step 2: Matrix Generation
