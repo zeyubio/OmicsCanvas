@@ -223,6 +223,20 @@ python scripts/omicscanvas_gene_tracks_2d3d.py \
   --out results/candidate_gene_3d.png
 ```
 
+<div align="center">
+
+  <h3>📍 Single-Gene Multi-Omics 2D Track</h3>
+  <img src="./images/fig4_gene_track_2D.png" width="750px" alt="2D Gene Track">
+  <p><i>A high-resolution 2D visualization showing the distribution of epigenetic signals across the gene body and regulatory elements.</i></p>
+
+  <br>
+
+  <h3>🧊 Single-Gene Multi-Omics 3D Track</h3>
+  <img src="./images/fig4_gene_track_3D.png" width="750px" alt="3D Gene Track">
+  <p><i>Enhanced Pseudo-3D perspective allowing for intuitive comparison of stacked signal intensities and co-occupancy patterns.</i></p>
+
+</div>
+
 
 ### 5. Circular Gene Plot
 Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
