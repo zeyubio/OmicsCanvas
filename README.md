@@ -383,6 +383,54 @@ python scripts/10_plot_whole_profile_2d3d.py \
   <p><b>Figure 1:</b> Global Pseudo-3D profile showing multi-omics signal distribution across the genome.</p>
 </div>
 
+#### 📊 Whole-profile methylation plot (2D / 3D)
+This script draws whole-profile DNA methylation curves across contexts (e.g., CG/CHG/CHH) in either:
+  * 2D: one panel per context (stacked vertically)
+  * 3D: pseudo-3D layered panels (offset axes per context)
+
+##### Input requirements
+
+###### File naming convention (critical)
+The script loads files using this pattern:
+<meth_dir>/<sample_id>_<context><whole_suffix> 
+
+Example (matching your command with --whole-suffix _profile.tsv):
+```bash
+CX_gene/WT_CG_profile.tsv
+CX_gene/WT_CHG_profile.tsv
+CX_gene/WT_CHH_profile.tsv
+CX_gene/Mut_CG_profile.tsv
+CX_gene/Mut_CHG_profile.tsv
+CX_gene/Mut_CHH_profile.tsv
+```
+
+2D example
+```bash
+python script/13_plot_methylation_profile_2d3d.py \
+  --mode 2d \
+  --meth-dir CX_gene \
+  --contexts CG,CHG,CHH \
+  --samples WT \
+  --labels WT \
+  --out-prefix WT_CX_profile_2D \
+  --whole-suffix _profile.tsv \
+  --fig-x 5 --fig-y 10
+```
+
+
+```bash
+python script/13_plot_methylation_profile_2d3d.py \
+  --mode 3d \
+  --meth-dir CX_gene \
+  --contexts CG,CHG,CHH \
+  --samples one \
+  --labels one \
+  --out-prefix one_CX_profile_3D \
+  --whole-suffix _profile.tsv \
+  --y-offset 50 \
+  --fig-x 10 --fig-y 10
+```
+
 
 ### 2. Signal vs. Expression Heatmap
 Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density.
