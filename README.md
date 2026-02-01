@@ -123,15 +123,18 @@ python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data 
 Visualize the genome-wide distribution of histone modifications or accessibility. The 3D mode allows stacking multiple tracks for intuitive comparison.
 
 ```bash
-
-python scripts/omicscanvas_plot_whole_profile_2d3d.py \
-  --mode 3d \
-  --matrix-dir matrices \
-  --gene-type gene \
-  --group "sample_1_H3K4me3,sample_2_H3K4me3;sample_1_H3K27me3,sample_2_H3K27me3" \
-  --ylabels "H3K4me3|H3K27me3" \
-  --out global_profile_3d.png
+python 10_plot_whole_profile_2d3d.py \
+  --mode 3d  \
+  --matrix-dir caculate_matrix \
+  --group "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
+  --names "H3K27me3,H3K36me3;H3K56ac,H3K4me3;H3K4me1,input" \
+  --ylabels "histone1;histione2;histione" \
+  --index-filter '' \
+  --line-colors 'dodgerblue,orangered' \
+  --legend \
+  --out whole_profile_gene_2d.pdf 
  ```
+
 
 <div align="center">
   <img src="./images/fig1_global_3D_1.png" width="800px">
