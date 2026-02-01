@@ -30,14 +30,14 @@ mamba create -n omicscanvas python=3.9 -y
 mamba activate omicscanvas
 
 # Install core scientific stack & bioinformatics tools
-mamba install -c conda-forge numpy pandas matplotlib scipy scikit-learn -y
+mamba install -c conda-forge numpy pandas matplotlib seaborn scipy scikit-learn -y
 mamba install -c bioconda pysam -y
 ```
 
 ### Option B: Pip
 
 ```bash
-pip install numpy pandas matplotlib scipy scikit-learn pysam
+pip install numpy pandas matplotlib scipy scikit-learn pysam seaborn
 ```
 
 
