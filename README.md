@@ -192,17 +192,73 @@ python 15_plot_gene_tracks_2d3d.py \
 </div>
 
 ### 2. Circular Gene Plot
+---
 Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
+
+#### Data preparation 
+04_prepare_extract_gene_methylation.py (extract per-gene methylation TSV from CX files),This script extracts per-cytosine methylation records (CG/CHG/CHH) from precomputed CX files within a gene-centered window (±distance) and writes TSV outputs. These TSVs can be directly used by downstream single-gene visualization (e.g., Script 16).
+
+##### What you need
+  * GFF3 annotation (critical): the script matches your gene IDs using --feature-type (default: mRNA) and --attr-key (default: ID) from the GFF3 attributes.
+    * If your IDs are on gene features, or the attribute key is not ID=, you must adjust --feature-type/--attr-key, otherwise it may fail with: No target IDs found...
+  * CX directory: files must follow the naming rule: <SRR>_<CX><cx-suffix> (default --cx-suffix .CX), e.g. SRR8742373_CG.CX, SRR8742373_CHG.CX, SRR8742373_CHH.CX.
+
+#### Output (for connecting to Script 16)
+
+By default, outputs go to --outdir single_gene/. For each (SRR/prefix × gene × context), it generates a TSV:
+  * <prefix>__<geneID>__CG.tsv / ...__CHG.tsv / ...__CHH.tsv (default --out-suffix .tsv).
+  * Note: --srr one also works—because --srr is simply treated as the filename prefix. It will look for meth_data/one_CG.CX / one_CHG.CX / one_CHH.CX.
+---
+
+A:Single gene
+```bash
+python 04_prepare_extract_gene_methylation.py \
+  -g Ptrichocarpa_210_v3.0.gene.gff3 \
+  --cx-dir meth_data/ \
+  --srr SRR8742373 \
+  --gene Potri.001G055900.5.v3.0
+```
+
+B:Single sample + gene list
+```bash
+python 04_prepare_extract_gene_methylation.py \
+  -g Ptrichocarpa_210_v3.0.gene.gff3 \
+  --cx-dir meth_data/ \
+  --srr SRR8742373 \
+  --gene-list genes_list.txt
+```
+C Multiple samples in one run
+```bash
+python 04_prepare_extract_gene_methylation.py \
+  -g Ptrichocarpa_210_v3.0.gene.gff3 \
+  --cx-dir meth_data/ \
+  --srr SRR8742373,SRR8742374,SRR8742375 \
+  --gene-list genes_list.txt
+```
+
+#### Single-gene circle plot
+16_plot_gene_circle_plot_ipynbmethod_groupylim_methfix.py (with/without methylation tracks),This script draws a single-gene circle plot, including BAM coverage tracks, and optionally CG/CHG/CHH methylation tracks.
+
+##### Minimal required parameters
+  * --gff3: annotation file (must contain the given --gene ID; otherwise it errors: “gene id not found in gff3”) 
+  * --gene: target gene/transcript ID
+  * --distance: upstream/downstream window
+  * --out: output PDF
+
+##### How to specify BAM samples: --bam-spec / --name-spec
+  * --bam-spec: use ; to separate groups (layers/modules), and , to list BAMs within a group.
+  * --name-spec: must match the structure of --bam-spec exactly (the script checks counts and will error if mismatched).
 
 
 ```bash
-python scripts/omicscanvas_gene_circle_plot.py \
-  --gff3 annotation.gff3 \
-  --gene Potri.006G061800 \
-  --bam-spec "H3K4me3.bam;ATAC.bam" \
-  --meth-spec "sample_CHH" \
-  --circle-meth-layout combined \
-  --out results/candidate_gene_circle.png
+python script/python 16_plot_gene_circle_plot.py \
+  --gff3 Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.001G055900.5.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --out Potri.001G055900.5.v3.0_gene_circle_no_meth.pdf
 ```
 
 <div align="center">
@@ -214,6 +270,11 @@ python scripts/omicscanvas_gene_circle_plot.py \
     <i>This circular coordinate framework maps multi-layer regulatory data (e.g., ChIP-seq signals and RNA-seq expression) onto an angular axis. It provides a compact yet comprehensive view of the epigenetic landscape and transcriptional activity for a specific candidate gene.</i>
   </p>
 </div>
+
+
+
+
+
 
 
 
