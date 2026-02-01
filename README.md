@@ -120,24 +120,27 @@ python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data 
 
 ### 🎨 Visualization Gallery
 
-#### 📊Global Multi-Omics Profile (Pseudo-3D)
+#### 📊 Global Multi-Omics Profile (Pseudo-3D)
 The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
 
-#### 📂 Input Matrices (Source & Naming)Matrices are typically pre-computed (e.g., via 06_compute_cx_gene_matrix.py). The script dynamically loads files using the following mapping:Path = <matrix-dir> / <sample_prefix> + <suffix>
-Gene Type (--gene-type)	Standard Suffix	Description
-tss	_tss_matrix.tsv	Transcription Start Site window
-gene	_gene_profile_matrix.tsv	TSS + Scaled Gene Body + TES
-tes	_tes_matrix.tsv	Transcription End Site window
+
+##### 📂 Input Matrices (Source & Naming)
+
+Matrices are typically pre-computed (e.g., via `06_compute_cx_gene_matrix.py`). The script dynamically loads files using the following mapping logic:
+
+**Path Construction:**
+`Path = <matrix-dir> / <sample_prefix> + <suffix>`
 
 
-##### Input matrices (source & naming)
+| Gene Type (`--gene-type`) | Standard Suffix | Description |
+| :--- | :--- | :--- |
+| `tss` | `_tss_matrix.tsv` | Transcription Start Site window |
+| `gene` | `_gene_profile_matrix.tsv` | TSS + Scaled Gene Body + TES |
+| `tes` | `_tes_matrix.tsv` | Transcription End Site window |
 
-Matrices are typically produced by 06_compute_cx_gene_matrix.py (or equivalent), generating:
-  * {sample}_tss_matrix.tsv
-  * {sample}_gene_profile_matrix.tsv
-  * {sample}_tes_matrix.tsv
+> **💡 Note:** The `sample_prefix` is parsed directly from the names provided in your `--group` argument. Ensure the file names in your directory strictly match this prefix.
 
 The script loads files as:
   <matrix-dir>/<sample_prefix><suffix_by_gene_type>
