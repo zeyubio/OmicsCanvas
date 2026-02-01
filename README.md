@@ -130,7 +130,7 @@ python scripts/omicscanvas_plot_whole_profile_2d3d.py \
   --gene-type gene \
   --group "sample_1_H3K4me3,sample_2_H3K4me3;sample_1_H3K27me3,sample_2_H3K27me3" \
   --ylabels "H3K4me3|H3K27me3" \
-  --out results/global_profile_3d.png
+  --out global_profile_3d.png
  ```
 
 <div align="center">
