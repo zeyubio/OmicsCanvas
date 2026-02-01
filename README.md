@@ -254,7 +254,7 @@ WITHOUT methylation
 ```bash
 python script/python 16_plot_gene_circle_plot.py \
   --gff3 Ptrichocarpa_210_v3.0.gene.gff3 \
-  --gene Potri.001G055900.5.v3.0 \
+  --gene Potri.001G031400.1.v3.0 \
   --distance 2000 \
   --bam-dir bam \
   --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
@@ -266,7 +266,7 @@ python script/python 16_plot_gene_circle_plot.py \
 
 <div align="center">
   <h2>⭕ Interactive Gene Circular Visualization</h2>
-  <img src="./images/fig5_circle_gene_track_3D .png" width="600px" alt="Circular Gene Track">
+  <img src="./images/fig5_circle_gene_track_3D_with_methylation.png" width="600px" alt="Circular Gene Track">
   <br>
   <p align="center" style="width: 80%;">
     <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
