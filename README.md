@@ -120,7 +120,7 @@ python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data 
 
 ### 🎨 Visualization Gallery
 #### Global Multi-Omics Profile (Pseudo-3D)
-* The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
+The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
 
