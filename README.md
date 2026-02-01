@@ -170,7 +170,7 @@ python 10_plot_whole_profile_2d3d.py \
   --matrix-dir caculate_matrix \
   --group "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
   --names "H3K27me3,H3K36me3;H3K56ac,H3K4me3;H3K4me1,input" \
-  --ylabels "Histone Set A;Histone Set B;Control Group" \
+  --ylabels "histone1;histone2;histone" \
   --index-filter '' \
   --line-colors 'dodgerblue,orangered' \
   --legend \
@@ -190,7 +190,7 @@ python 10_plot_whole_profile_2d3d.py \
   --matrix-dir caculate_matrix \
   --group  "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
   --names  "H3K27me3,H3K36me3;H3K56ac,H3K4me3;H3K4me1,input" \
-  --ylabels "histone1;histone2;histone3" \
+  --ylabels "histone1;histone2;histone" \
   --index-filter '' \
   --legend \
   --out whole_profile_gene_2d.pdf
