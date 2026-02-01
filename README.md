@@ -125,7 +125,7 @@ The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
 
-
+---
 ##### 📂 Input Matrices (Source & Naming)
 
 Matrices are typically pre-computed (e.g., via `06_compute_cx_gene_matrix.py`). The script dynamically loads files using the following mapping logic:
@@ -142,24 +142,22 @@ Matrices are typically pre-computed (e.g., via `06_compute_cx_gene_matrix.py`). 
 
 > **💡 Note:** The `sample_prefix` is parsed directly from the names provided in your `--group` argument. Ensure the file names in your directory strictly match this prefix.
 
-The script loads files as:
-  <matrix-dir>/<sample_prefix><suffix_by_gene_type>
-  sample_prefix comes from --group
-  suffix depends on --gene-type and --naming
+---
 
-Matrix format:
-  First column: gene/transcript IDs (index)
-  Remaining columns: bins (signal)
+### 🛠 Layout Syntax: The Core Logic
 
-##### Layout language: --group / --names / --ylabels (critical)
-Separators:
-  , = multiple samples (multiple lines) within one panel
-  ; = multiple panels within one column
-  | = start a new column
-Hard rules:
-  --names must mirror --group structure exactly (same columns/panels/line counts)
-  --ylabels provides one label per panel (use ; and optional |, NOT commas)
+The script uses a unique "Layout Language" for `--group`, `--names`, and `--ylabels`. Mastering the separators is critical for organizing your plot:
 
+#### 🔗 Separator Rules
+* **`,` (Comma)**: Groups multiple samples into the **same panel** (rendered as multiple lines).
+* **`;` (Semicolon)**: Stacks **panels** vertically within the same column.
+* **`|` (Pipe)**: Starts a **new column**.
+
+#### ⚠️ Hard Rules
+1.  **Strict Symmetry**: `--names` must mirror the structure of `--group` exactly (identical column, panel, and line counts).
+2.  **Label Mapping**: `--ylabels` defines exactly one label per panel (use `;` and `|` to separate, **do not** use commas).
+
+---
 ##### Quick start
 ###### 6 samples → 3 panels → stacked 3D
 
