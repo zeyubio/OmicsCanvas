@@ -44,7 +44,6 @@ pip install numpy pandas matplotlib scipy scikit-learn pysam seaborn
 ## 🚀 Usage & Workflow
 The OmicsCanvas workflow consists of three main stages: Preparation, Matrix Calculation, and Visualization.
 
-
 ### Step 1: Preparation
 #### 1.Convert your annotation (GFF3) into standard BED format and calculate gene lengths.
 ```bash
@@ -74,10 +73,10 @@ Output: This script generates three context-specific files in the designated dir
 sample_CG.CX,sample_CHG.CX,sample_CHH.CX
 
 Each output file is tab-delimited with 4 columns:
-1.Chromosome
-2.Position
-3.Methylated read counts
-4.Coverage / depth
+  * 1.Chromosome
+  * 2.Position
+  * 3.Methylated read counts
+  * 4.depth
 
 #### 3. Integration of Biological Replicates (Optional Step)
 Combine multiple context-specific CX files from biological replicates into a single consensus file to improve data coverage and statistical confidence.
@@ -119,6 +118,117 @@ python scripts/06_compute_cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir
 > **Output:** This process generates three core matrix files: `_tss_matrix.tsv`, `_gene_profile_matrix.tsv`, and `_tes_matrix.tsv`.
 
 ### 🎨 Visualization Gallery
+
+---
+#### 1. Single Gene Visualization (Pseudo-3D)
+Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.15_plot_gene_tracks_2d3d.py plot a single target gene as stacked “tracks” using BAM coverage (ChIP/ATAC/RNA, etc.).
+It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverage across [gene_start - distance, gene_end + distance] and draws:
+  * --mode 2d : classic vertical stacked tracks
+  * --mode 3d : pseudo-3D stacked tracks (offset panels + vertical dashed connectors)
+
+##### Required / essential parameters (minimal set)
+  * --mode        : 2d or 3d
+  * --gff3        : genome annotation (GFF3)
+  * --gene        : target transcript/gene ID that MUST match the mRNA ID in GFF3 (otherwise it will error)
+  * --distance    : upstream/downstream window (bp)
+  * --bam-dir     : directory containing BAM files
+  * --bam-spec    : how BAM samples are grouped into layers/tracks
+  * --name-spec   : track labels; MUST have exactly the same structure as --bam-spec
+  * --fig-x/y     : figure size (inches)
+  * --out         : output file (.pdf/.svg recommended)
+
+##### How to specify samples (MOST IMPORTANT)
+--bam-spec and --name-spec use the same layer syntax:
+  * ';' separates groups (think: layers / rows)
+  * ',' separates tracks within the same group
+
+##### Example (3 layers, each layer has 2 tracks):
+  * --bam-spec  "A.bam,B.bam;C.bam,D.bam;E.bam,F.bam"
+  * --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2"
+
+# If the number of groups or tracks per group does NOT match between bam-spec and name-spec,
+# the script will raise an error.
+
+
+
+```bash
+python 15_plot_gene_tracks_2d3d.py \
+  --mode 2d \
+  --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.006G061800.1.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --fig-x 12 --fig-y 6 \
+  --out Potri.006G061800.1.v3.0_gene_track_2D.pdf
+```
+
+<div align="center">
+
+  <h3>📍 Single-Gene Multi-Omics 2D Track</h3>
+  <img src="./images/fig4_gene_track_2D .png" width="750px" alt="2D Gene Track">
+  <p><i>A high-resolution 2D visualization showing the distribution of epigenetic signals across the gene body and regulatory elements.</i></p>
+
+  <br>
+
+  <h3>🧊 Single-Gene Multi-Omics 3D Track</h3>
+  <img src="./images/fig4_gene_track_3D .png" width="750px" alt="3D Gene Track">
+  <p><i>Enhanced Pseudo-3D perspective allowing for intuitive comparison of stacked signal intensities and co-occupancy patterns.</i></p>
+
+</div>
+
+```bash
+python 15_plot_gene_tracks_2d3d.py \
+  --mode 3d \
+  --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.006G061800.1.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --fig-x 12 --fig-y 6 \
+  --out Potri.006G061800.1.v3.0_gene_track_2D.pdf
+```
+
+<div align="center">
+
+  <h3>📍 Single-Gene Multi-Omics 2D Track</h3>
+  <img src="./images/fig4_gene_track_2D .png" width="750px" alt="2D Gene Track">
+  <p><i>A high-resolution 2D visualization showing the distribution of epigenetic signals across the gene body and regulatory elements.</i></p>
+
+  <br>
+
+  <h3>🧊 Single-Gene Multi-Omics 3D Track</h3>
+  <img src="./images/fig4_gene_track_3D .png" width="750px" alt="3D Gene Track">
+  <p><i>Enhanced Pseudo-3D perspective allowing for intuitive comparison of stacked signal intensities and co-occupancy patterns.</i></p>
+
+</div>
+
+### 5. Circular Gene Plot
+Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
+
+```bash
+python scripts/omicscanvas_gene_circle_plot.py \
+  --gff3 annotation.gff3 \
+  --gene Potri.006G061800 \
+  --bam-spec "H3K4me3.bam;ATAC.bam" \
+  --meth-spec "sample_CHH" \
+  --circle-meth-layout combined \
+  --out results/candidate_gene_circle.png
+```
+
+<div align="center">
+  <h2>⭕ Interactive Gene Circular Visualization</h2>
+  <img src="./images/fig5_circle_gene_track_3D .png" width="600px" alt="Circular Gene Track">
+  <br>
+  <p align="center" style="width: 80%;">
+    <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
+    <i>This circular coordinate framework maps multi-layer regulatory data (e.g., ChIP-seq signals and RNA-seq expression) onto an angular axis. It provides a compact yet comprehensive view of the epigenetic landscape and transcriptional activity for a specific candidate gene.</i>
+  </p>
+</div>
+
+
 
 #### 📊 Global Multi-Omics Profile (Pseudo-3D)
 The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
@@ -300,56 +410,7 @@ python scripts/omicscanvas_histone_cluster_pipeline.py \
 </div>
 
 
-### 4. Single Gene Visualization (Pseudo-3D)
-Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.
 
-```bash
-python scripts/omicscanvas_gene_tracks_2d3d.py \
-  --mode 3d \
-  --gff3 annotation.gff3 \
-  --gene Potri.006G061800 \
-  --bam-dir bam_files \
-  --bam-spec "H3K4me3.bam;H3K27me3.bam" \
-  --out results/candidate_gene_3d.png
-```
-
-<div align="center">
-
-  <h3>📍 Single-Gene Multi-Omics 2D Track</h3>
-  <img src="./images/fig4_gene_track_2D .png" width="750px" alt="2D Gene Track">
-  <p><i>A high-resolution 2D visualization showing the distribution of epigenetic signals across the gene body and regulatory elements.</i></p>
-
-  <br>
-
-  <h3>🧊 Single-Gene Multi-Omics 3D Track</h3>
-  <img src="./images/fig4_gene_track_3D .png" width="750px" alt="3D Gene Track">
-  <p><i>Enhanced Pseudo-3D perspective allowing for intuitive comparison of stacked signal intensities and co-occupancy patterns.</i></p>
-
-</div>
-
-
-### 5. Circular Gene Plot
-Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
-
-```bash
-python scripts/omicscanvas_gene_circle_plot.py \
-  --gff3 annotation.gff3 \
-  --gene Potri.006G061800 \
-  --bam-spec "H3K4me3.bam;ATAC.bam" \
-  --meth-spec "sample_CHH" \
-  --circle-meth-layout combined \
-  --out results/candidate_gene_circle.png
-```
-
-<div align="center">
-  <h2>⭕ Interactive Gene Circular Visualization</h2>
-  <img src="./images/fig5_circle_gene_track_3D .png" width="600px" alt="Circular Gene Track">
-  <br>
-  <p align="center" style="width: 80%;">
-    <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
-    <i>This circular coordinate framework maps multi-layer regulatory data (e.g., ChIP-seq signals and RNA-seq expression) onto an angular axis. It provides a compact yet comprehensive view of the epigenetic landscape and transcriptional activity for a specific candidate gene.</i>
-  </p>
-</div>
 
 
 
