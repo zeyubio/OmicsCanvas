@@ -266,7 +266,7 @@ python script/python 16_plot_gene_circle_plot.py \
 
 <div align="center">
   <h2>⭕ Interactive Gene Circular Visualization</h2>
-  <img src="./images/fig5_circle_gene_track_3D_with_methylation.png" width="600px" alt="Circular Gene Track">
+  <img src="./images/fig5_circle_gene_track_3D .png" width="600px" alt="Circular Gene Track">
   <br>
   <p align="center" style="width: 80%;">
     <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
