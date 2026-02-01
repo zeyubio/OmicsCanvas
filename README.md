@@ -49,7 +49,7 @@ The OmicsCanvas workflow consists of three main stages: Preparation, Matrix Calc
 #### 1.Convert your annotation (GFF3) into standard BED format and calculate gene lengths.
 ```bash
 
-python scripts/omicscanvas_gff_to_bed_genes_length.py 
+python scripts/01_prepare_gff_to_bed_genes_length.py 
   -i annotation.gff3 \
   -o gene.bed \
   -l gene_cds_length.tsv \
