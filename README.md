@@ -464,8 +464,8 @@ python script/13_plot_methylation_profile_2d3d.py \
 
 Multi-sample 3D
 ```bash
-python 13_plot_methylation_profile_2d3d_fixed.py \
-  --mode both \
+python script/13_plot_methylation_profile_2d3d.py \
+  --mode 3d \
   --meth-dir CX_gene \
   --contexts CG,CHG,CHH \
   --samples WT,Mut \
@@ -489,7 +489,7 @@ Sort genes by expression level (High to Low) and visualize the corresponding epi
 
 ```bash
 
-python scripts/omicscanvas_histone_vs_expr_heatmap.py \
+python scripts/11_plot_histone_vs_expr_heatmap.py \
   --matrix-dir matrices \
   --tracks "H3K4me3" \
   --expr expression_FPKM.txt \
@@ -524,7 +524,7 @@ Use K-means clustering to identify distinct chromatin states or regulatory patte
 
 ```bash
 
-python scripts/omicscanvas_histone_cluster_pipeline.py \
+python scripts/12_plot_histone_cluster_pipeline.py \
   --matrix-dir matrices \
   --in-group "Sample_H3K4me3;Sample_H3K27me3" \
   --k 4 \
