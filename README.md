@@ -254,7 +254,7 @@ WITHOUT methylation
 ```bash
 python script/python 16_plot_gene_circle_plot.py \
   --gff3 Ptrichocarpa_210_v3.0.gene.gff3 \
-  --gene Potri.001G031400.1.v3.0 \
+  --gene Potri.001G055900.5.v3.0 \
   --distance 2000 \
   --bam-dir bam \
   --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
@@ -276,20 +276,29 @@ python script/python 16_plot_gene_circle_plot.py \
 
 WITH methylation
 ```bash
-python 16_plot_gene_circle_plot_ipynbmethod_groupylim_methfix.py \
+python script/16_plot_gene_circle_plot.py \
   --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
-  --gene Potri.001G055900.5.v3.0 \
+  --gene Potri.001G031400.1.v3.0 \
   --distance 2000 \
   --bam-dir bam \
   --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
   --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
   --meth-dir single_gene \
-  --meth-spec one__Potri.001G055900.5.v3.0 \
+  --meth-spec one__Potri.001G031400.1.v3.0 \
   --circle-meth-layout combined \
-  --out Potri.001G055900.5.v3.0_gene_circle_with_meth.pdf
+  --out Potri.001G031400.1.v3.0_gene_circle_with_meth.pdf
 ```
 
 
+<div align="center">
+  <h2>⭕ Interactive Gene Circular Visualization</h2>
+  <img src="./images/fig5_circle_gene_track_3D_with_methylation.png" width="600px" alt="Circular Gene Track">
+  <br>
+  <p align="center" style="width: 80%;">
+    <b>Figure: Integrative Circular Track of Histone Modifications and Transcriptomics</b><br>
+    <i>This circular coordinate framework maps multi-layer regulatory data (e.g., ChIP-seq signals and RNA-seq expression) onto an angular axis. It provides a compact yet comprehensive view of the epigenetic landscape and transcriptional activity for a specific candidate gene.</i>
+  </p>
+</div>
 
 
 
