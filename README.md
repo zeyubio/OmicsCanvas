@@ -165,7 +165,7 @@ The script uses a unique "Layout Language" for `--group`, `--names`, and `--ylab
 Ideal for visualizing "layers" of epigenetic information with depth.
 
 ```bash
-python 10_plot_whole_profile_2d3d.py \
+python scripts/10_plot_whole_profile_2d3d.py \
   --mode 3d \
   --matrix-dir caculate_matrix \
   --group "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
@@ -185,7 +185,7 @@ python 10_plot_whole_profile_2d3d.py \
 
 ###### 2D Standard Mode
 ```bash
-python 10_plot_whole_profile_2d3d.py \
+python scripts/10_plot_whole_profile_2d3d.py \
   --mode 2d \
   --matrix-dir caculate_matrix \
   --group  "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
