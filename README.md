@@ -191,8 +191,9 @@ python 15_plot_gene_tracks_2d3d.py \
 
 </div>
 
-### 5. Circular Gene Plot
+### 2. Circular Gene Plot
 Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
+
 
 ```bash
 python scripts/omicscanvas_gene_circle_plot.py \
