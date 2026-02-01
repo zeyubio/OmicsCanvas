@@ -119,8 +119,38 @@ python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data 
 > **Output:** This process generates three core matrix files: `_tss_matrix.tsv`, `_gene_profile_matrix.tsv`, and `_tes_matrix.tsv`.
 
 ### 🎨 Visualization Gallery
-1. Global Multi-Omics Profile (Pseudo-3D)
-Visualize the genome-wide distribution of histone modifications or accessibility. The 3D mode allows stacking multiple tracks for intuitive comparison.
+#### Global Multi-Omics Profile (Pseudo-3D)
+Visualize the genome-wide distribution of histone modifications or accessibility. The 3D mode allows stacking multiple tracks for intuitive comparison.10_plot_whole_profile_2d3d.py generates whole-genome meta-profiles from genes × bins matrices.For each sample, it aggregates across genes (mean/median) to produce a 1D profile curve, and supports:
+2D mode: vertically stacked panels;
+3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
+
+##### Input matrices (source & naming)
+
+Matrices are typically produced by 06_compute_cx_gene_matrix.py (or equivalent), generating:
+  {sample}_tss_matrix.tsv
+  {sample}_gene_profile_matrix.tsv
+  {sample}_tes_matrix.tsv
+
+The script loads files as:
+  <matrix-dir>/<sample_prefix><suffix_by_gene_type>
+  sample_prefix comes from --group
+  suffix depends on --gene-type and --naming
+
+Matrix format:
+  First column: gene/transcript IDs (index)
+  Remaining columns: bins (signal)
+
+##### Layout language: --group / --names / --ylabels (critical)
+Separators:
+  , = multiple samples (multiple lines) within one panel
+  ; = multiple panels within one column
+  | = start a new column
+Hard rules:
+  --names must mirror --group structure exactly (same columns/panels/line counts)
+  --ylabels provides one label per panel (use ; and optional |, NOT commas)
+
+##### Quick start
+###### 6 samples → 3 panels → stacked 3D
 
 ```bash
 python 10_plot_whole_profile_2d3d.py \
@@ -134,7 +164,18 @@ python 10_plot_whole_profile_2d3d.py \
   --legend \
   --out whole_profile_gene_2d.pdf 
  ```
-
+###### 2D mode
+```bash
+python 10_plot_whole_profile_2d3d.py \
+  --mode 2d \
+  --matrix-dir caculate_matrix \
+  --group  "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
+  --names  "H3K27me3,H3K36me3;H3K56ac,H3K4me3;H3K4me1,input" \
+  --ylabels "histone1;histone2;histone3" \
+  --index-filter '' \
+  --legend \
+  --out whole_profile_gene_2d.pdf
+```
 
 <div align="center">
   <img src="./images/fig1_global_3D_1.png" width="800px">
