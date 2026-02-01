@@ -477,7 +477,7 @@ python 13_plot_methylation_profile_2d3d_fixed.py \
 ```
 
 <div align="center">
-  <img src="./images/figure_3_methylation_WT_3D.png" width="600px">
+  <img src="./images/figure_3_methylation_WT_MUT_3D.png" width="600px">
   <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
   <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
 </div>
