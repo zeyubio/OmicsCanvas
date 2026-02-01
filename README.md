@@ -254,12 +254,12 @@ WITHOUT methylation
 ```bash
 python script/python 16_plot_gene_circle_plot.py \
   --gff3 Ptrichocarpa_210_v3.0.gene.gff3 \
-  --gene Potri.001G055900.5.v3.0 \
+  --gene Potri.006G061800.1.v3.0 \
   --distance 2000 \
   --bam-dir bam \
   --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
   --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
-  --out Potri.001G055900.5.v3.0_gene_circle_no_meth.pdf
+  --out Potri.006G061800.1.v3.0_gene_circle_no_meth.pdf
 ```
 
 
