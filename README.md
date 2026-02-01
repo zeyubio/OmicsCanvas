@@ -145,9 +145,8 @@ It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverag
 ##### Example (3 layers, each layer has 2 tracks):
   * --bam-spec  "A.bam,B.bam;C.bam,D.bam;E.bam,F.bam"
   * --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2"
-
-# If the number of groups or tracks per group does NOT match between bam-spec and name-spec,
-# the script will raise an error.
+ 
+* If the number of groups or tracks per group does NOT match between bam-spec and name-spec, the script will raise an error.
 
 
 
