@@ -394,7 +394,7 @@ This script draws whole-profile DNA methylation curves across contexts (e.g., CG
 The script loads files using this pattern:
 <meth_dir>/<sample_id>_<context><whole_suffix> 
 
-Example (matching your command with --whole-suffix _profile.tsv):
+##### Example (matching your command with --whole-suffix _profile.tsv):
 ```bash
 CX_gene/WT_CG_profile.tsv
 CX_gene/WT_CHG_profile.tsv
@@ -403,6 +403,23 @@ CX_gene/Mut_CG_profile.tsv
 CX_gene/Mut_CHG_profile.tsv
 CX_gene/Mut_CHH_profile.tsv
 ```
+##### Must-have parameters (you should document clearly)
+  * --meth-dir
+  Directory containing whole-profile files. Files are discovered by the naming rule above. 
+  * --samples
+  Comma-separated sample IDs used in filenames (e.g., WT,Mut). 
+  * --labels
+  Comma-separated legend labels in the same order as --samples. 
+  * --contexts
+  Comma-separated contexts to plot (e.g., CG,CHG,CHH). This also controls panel/layer order. 
+  * --whole-suffix
+  Suffix of the profile files. Default is _whole_line.txt.
+  If your files are named like <sample>_<context>_profile.tsv, use --whole-suffix _profile.tsv. 
+  * --out-prefix
+  Output prefix. The script writes <prefix>.2D.pdf and/or <prefix>.3D.pdf into the current directory. 
+  * --mode
+  Choose outputs: 2d, 3d, or both (default: both). 
+
 
 2D example
 ```bash
@@ -417,19 +434,53 @@ python script/13_plot_methylation_profile_2d3d.py \
   --fig-x 5 --fig-y 10
 ```
 
+<div align="center">
+  <img src="./images/figure_3_methylation_WT_2D.png" width="600px">
+  <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
+  <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
+</div>
 
+
+3D example
 ```bash
 python script/13_plot_methylation_profile_2d3d.py \
   --mode 3d \
   --meth-dir CX_gene \
   --contexts CG,CHG,CHH \
-  --samples one \
-  --labels one \
-  --out-prefix one_CX_profile_3D \
+  --samples WT \
+  --labels WT \
+  --out-prefix WT_CX_profile_3D \
   --whole-suffix _profile.tsv \
   --y-offset 50 \
   --fig-x 10 --fig-y 10
 ```
+
+<div align="center">
+  <img src="./images/figure_3_methylation_WT_3D.png" width="600px">
+  <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
+  <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
+</div>
+
+
+Multi-sample 3D
+```bash
+python 13_plot_methylation_profile_2d3d_fixed.py \
+  --mode both \
+  --meth-dir CX_gene \
+  --contexts CG,CHG,CHH \
+  --samples WT,Mut \
+  --labels WT,Mut \
+  --whole-suffix _profile.tsv \
+  --out-prefix WT_vs_Mut_CX \
+  --line-colors "#1f77b4,#d62728" \
+  --fig-x 10 --fig-y 10
+```
+
+<div align="center">
+  <img src="./images/figure_3_methylation_WT_3D.png" width="600px">
+  <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
+  <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
+</div>
 
 
 ### 2. Signal vs. Expression Heatmap
