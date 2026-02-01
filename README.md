@@ -144,36 +144,46 @@ Matrices are typically pre-computed (e.g., via `06_compute_cx_gene_matrix.py`). 
 
 ---
 
-### 🛠 Layout Syntax: The Core Logic
+#### 🛠 Layout Syntax: The Core Logic
 
 The script uses a unique "Layout Language" for `--group`, `--names`, and `--ylabels`. Mastering the separators is critical for organizing your plot:
 
-#### 🔗 Separator Rules
+##### 🔗 Separator Rules
 * **`,` (Comma)**: Groups multiple samples into the **same panel** (rendered as multiple lines).
 * **`;` (Semicolon)**: Stacks **panels** vertically within the same column.
 * **`|` (Pipe)**: Starts a **new column**.
 
-#### ⚠️ Hard Rules
+##### ⚠️ Hard Rules
 1.  **Strict Symmetry**: `--names` must mirror the structure of `--group` exactly (identical column, panel, and line counts).
 2.  **Label Mapping**: `--ylabels` defines exactly one label per panel (use `;` and `|` to separate, **do not** use commas).
 
 ---
-##### Quick start
-###### 6 samples → 3 panels → stacked 3D
+
+#### 🚀 Quick Start Examples
+
+##### 1. 3D Stacked Mode (6 Samples → 3 Overlaid Panels)
+Ideal for visualizing "layers" of epigenetic information with depth.
 
 ```bash
 python 10_plot_whole_profile_2d3d.py \
-  --mode 3d  \
+  --mode 3d \
   --matrix-dir caculate_matrix \
   --group "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
   --names "H3K27me3,H3K36me3;H3K56ac,H3K4me3;H3K4me1,input" \
-  --ylabels "histone1;histione2;histione" \
+  --ylabels "Histone Set A;Histone Set B;Control Group" \
   --index-filter '' \
   --line-colors 'dodgerblue,orangered' \
   --legend \
-  --out whole_profile_gene_2d.pdf 
+  --out whole_profile_gene_3d.pdf
  ```
-###### 2D mode
+
+<div align="center">
+  <img src="./images/fig1_global_3D_1.png" width="800px">
+  <p><b>Figure 1:</b> Global Pseudo-3D profile showing multi-omics signal distribution across the genome.</p>
+</div>
+
+
+###### 2D Standard Mode
 ```bash
 python 10_plot_whole_profile_2d3d.py \
   --mode 2d \
