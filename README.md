@@ -197,7 +197,7 @@ python 10_plot_whole_profile_2d3d.py \
 ```
 
 <div align="center">
-  <img src="./images/fig1_global_3D_1.png" width="800px">
+  <img src="./images/fig1_global_2D.png" width="800px">
   <p><b>Figure 1:</b> Global Pseudo-3D profile showing multi-omics signal distribution across the genome.</p>
 </div>
 
