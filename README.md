@@ -119,12 +119,12 @@ python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data 
 > **Output:** This process generates three core matrix files: `_tss_matrix.tsv`, `_gene_profile_matrix.tsv`, and `_tes_matrix.tsv`.
 
 ### 🎨 Visualization Gallery
----
+***
 #### 📊Global Multi-Omics Profile (Pseudo-3D)
 The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
----
+***
 ##### Input matrices (source & naming)
 
 Matrices are typically produced by 06_compute_cx_gene_matrix.py (or equivalent), generating:
