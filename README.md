@@ -97,7 +97,7 @@ Convert sorted BAM files into gene-centric coverage matrices (Promoter, Body, Te
 
 
 ```bash
-python scripts/omicscanvas_bam_to_gene_matrices.py \
+python scripts/05_compute_bam_to_gene_matrices.py \
   -b Sample_H3K4me3.sorted.bam \
   -g gene.bed \
   --outdir matrices \
@@ -113,7 +113,7 @@ python scripts/omicscanvas_bam_to_gene_matrices.py \
 Process CX reports into gene-centric methylation matrices.
 
 ```bash
-python scripts/cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data -o CX_gene
+python scripts/06_compute_cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir meth_data -o CX_gene
 ```
 
 > **Output:** This process generates three core matrix files: `_tss_matrix.tsv`, `_gene_profile_matrix.tsv`, and `_tes_matrix.tsv`.
