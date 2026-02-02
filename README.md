@@ -588,17 +588,17 @@ python 11_plot_histone_vs_expr_heatmap.py \
     <td style="border: none; width: 33%;">
       <img src="./images/fig2_heatmap_H3K4me3_1.png" width="100%">
       <br>
-      <p><i>Sample 1: H3K4me3 TSS Signal</i></p>
+      <p><i> H3K4me3 TSS Signal</i></p>
     </td>
     <td style="border: none; width: 33%;">
       <img src="./images/fig2_heatmap_H3K4me3_2.png" width="100%">
       <br>
-      <p><i>Sample 2: H3K4me3 GeneBody Signal</i></p>
+      <p><i> H3K4me3 GeneBody Signal</i></p>
     </td>
     <td style="border: none; width: 33%;">
       <img src="./images/fig2_heatmap_H3K4me3_3.png" width="100%">
       <br>
-      <p><i>Sample 3: H3K4me3 TES Signal</i></p>
+      <p><i> H3K4me3 TES Signal</i></p>
     </td>
   </tr>
 </table>
@@ -629,7 +629,7 @@ Output is always:
 
 ```bash
 python script/14_plot_meth_vs_expr_heatmap.py \
-  --sample one \
+  --sample WT \
   --cx CG \
   --meth-dir CX_gene \
   --fpkm FPKM.txt \
@@ -639,8 +639,57 @@ python script/14_plot_meth_vs_expr_heatmap.py \
   --distance 2000 \
   --scale-mode ratio \
   --cmap RdBu_r \
-  --out-prefix one --allow-unequal-segments
+  --out-prefix WT \
+  --allow-unequal-segments
+
+python script/14_plot_meth_vs_expr_heatmap.py \
+  --sample WT \
+  --cx CHG \
+  --meth-dir CX_gene \
+  --fpkm FPKM.txt \
+  --fpkm-cols 0,1 \
+  --none-bins 10 \
+  --exp-bins 90 \
+  --distance 2000 \
+  --scale-mode ratio \
+  --cmap RdBu_r \
+  --out-prefix WT \
+  --allow-unequal-segments
+
+python script/14_plot_meth_vs_expr_heatmap.py \
+  --sample WT \
+  --cx CHH \
+  --meth-dir CX_gene \
+  --fpkm FPKM.txt \
+  --fpkm-cols 0,1 \
+  --none-bins 10 \
+  --exp-bins 90 \
+  --distance 2000 \
+  --scale-mode ratio \
+  --cmap RdBu_r \
+  --out-prefix WT --allow-unequal-segments
 ```
+
+<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig6_methylation_WT_heatmap_CG.png" width="100%">
+      <br>
+      <p><i> CG methylation Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig6_methylation_WT_heatmap_CHG.png" width="100%">
+      <br>
+      <p><i> CHG methylation Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig6_methylation_WT_heatmap_CHH.png" width="100%">
+      <br>
+      <p><i> CHH methylation Signal</i></p>
+    </td>
+  </tr>
+</table>
+
 
 ### 3. Clustering Analysis
 Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.
