@@ -512,6 +512,7 @@ So your --matrix-dir typically contains files like:
 
   Use --expr-cols to specify which columns are used to compute the mean expression
   (0-based indexing, counting columns AFTER the gene ID index column).
+
 ------------------------------------------------------------
 
 ##### Required Parameters (Key points)
@@ -532,13 +533,54 @@ Other commonly used (optional) parameters:
 
 ```bash
 
-python scripts/11_plot_histone_vs_expr_heatmap.py \
-  --matrix-dir matrices \
-  --tracks "H3K4me3" \
-  --expr expression_FPKM.txt \
+python 11_plot_histone_vs_expr_heatmap.py \
+  --matrix-dir caculate_matrix \
+  --tracks "SRR8742376" \
+  --gene-types TSS \
+  --expr FPKM.txt \
+  --expr-cols 0,1 \
+  --none-bins 10 \
   --exp-bins 90 \
+  --distance 2000 \
   --cmap RdBu_r \
-  --out-prefix results/H3K4me3_vs_Expr
+  --scale-mode quantile \
+  --quantiles 0.01,0.99 \
+  --out-format pdf \
+  --out-prefix H3K4me3_TSS \
+  --outdir out_heatmap
+
+python 11_plot_histone_vs_expr_heatmap.py \
+  --matrix-dir caculate_matrix \
+  --tracks "SRR8742376" \
+  --gene-types gene \
+  --expr FPKM.txt \
+  --expr-cols 0,1 \
+  --none-bins 10 \
+  --exp-bins 90 \
+  --distance 2000 \
+  --cmap RdBu_r \
+  --scale-mode quantile \
+  --quantiles 0.01,0.99 \
+  --out-format pdf \
+  --out-prefix H3K4me3_gene \
+  --outdir out_heatmap
+
+python 11_plot_histone_vs_expr_heatmap.py \
+  --matrix-dir caculate_matrix \
+  --tracks "SRR8742376" \
+  --gene-types TES \
+  --expr FPKM.txt \
+  --expr-cols 0,1 \
+  --none-bins 10 \
+  --exp-bins 90 \
+  --distance 2000 \
+  --cmap RdBu_r \
+  --scale-mode quantile \
+  --quantiles 0.01,0.99 \
+  --out-format pdf \
+  --out-prefix H3K4me3_TES \
+  --outdir out_heatmap
+
  ```
 
 <table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
