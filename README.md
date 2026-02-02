@@ -795,45 +795,25 @@ python 12_plot_histone_cluster_pipeline_clustersep.py \
     <td style="border: none; width: 33%;">
       <img src="./images/fig7_histone_cluster_TSS_panel_heatmaps_annot_k8.png" width="100%">
       <br>
-      <p><i>Sample 1: leaf TSS cluster heatmap Signal</i></p>
+      <p><i>Sample 1: leaf TSS cluster heatmap</i></p>
     </td>
     <td style="border: none; width: 33%;">
       <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
       <br>
-      <p><i>Sample 2: leaf Genebody cluster heatmap Signal</i></p>
+      <p><i>Sample 2: leaf Genebody cluster heatmap</i></p>
     </td>
     <td style="border: none; width: 33%;">
       <img src="./images/fig7_histone_cluster_TES_panel_heatmaps_annot_k8.png" width="100%">
       <br>
-      <p><i>Sample 3: leaf TES cluster heatmap Signal</i></p>
+      <p><i>Sample 3: leaf TES cluster heatmap</i></p>
     </td>
   </tr>
 </table>
 
-
-<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
-  <tr>
-    <td style="border: none; width: 33%;">
-      <img src="./images/fig3_cluster_lineplot_TSS.png" width="100%">
-      <br>
-      <p><i>Sample 1: H3K4me1 H3K4me3 TSS cluster heatmap Signal</i></p>
-    </td>
-    <td style="border: none; width: 33%;">
-      <img src="./images/fig3_cluster_lineplot_genebody.png" width="100%">
-      <br>
-      <p><i>Sample 2: H3K4me1 H3K4me3 Genebody cluster heatmap Signal</i></p>
-    </td>
-    <td style="border: none; width: 33%;">
-      <img src="./images/fig3_cluster_lineplot_TES.png" width="100%">
-      <br>
-      <p><i>Sample 3: H3K4me1 H3K4me3 TES cluster heatmap Signal</i></p>
-    </td>
-  </tr>
-</table>
 
 
 <div align="center">
-  <img src="./images/fig3_cluster_boxplot.png" width="600px">
+  <img src="./images/fig7_histone_cluster_cluster_expr_boxplot_k8.png" width="600px">
   <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
   <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
 </div>
