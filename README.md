@@ -191,7 +191,7 @@ python 15_plot_gene_tracks_2d3d.py \
 
 </div>
 
-### 2. Circular Gene Plot
+#### 2. Circular Gene Plot
 ---
 Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
 
@@ -236,16 +236,16 @@ python 04_prepare_extract_gene_methylation.py \
   --gene-list genes_list.txt
 ```
 
-#### Single-gene circle plot
+##### Single-gene circle plot
 16_plot_gene_circle_plot_ipynbmethod_groupylim_methfix.py (with/without methylation tracks),This script draws a single-gene circle plot, including BAM coverage tracks, and optionally CG/CHG/CHH methylation tracks.
 
-##### Minimal required parameters
+###### Minimal required parameters
   * --gff3: annotation file (must contain the given --gene ID; otherwise it errors: “gene id not found in gff3”) 
   * --gene: target gene/transcript ID
   * --distance: upstream/downstream window
   * --out: output PDF
 
-##### How to specify BAM samples: --bam-spec / --name-spec
+###### How to specify BAM samples: --bam-spec / --name-spec
   * --bam-spec: use ; to separate groups (layers/modules), and , to list BAMs within a group.
   * --name-spec: must match the structure of --bam-spec exactly (the script checks counts and will error if mismatched).
 
@@ -302,7 +302,7 @@ python script/16_plot_gene_circle_plot.py \
 
 
 
-#### 📊 Global Multi-Omics Profile (Pseudo-3D)
+#### 3. 📊Global Multi-Omics Profile (Pseudo-3D)
 The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
@@ -383,7 +383,7 @@ python scripts/10_plot_whole_profile_2d3d.py \
   <p><b>Figure 1:</b> Global Pseudo-3D profile showing multi-omics signal distribution across the genome.</p>
 </div>
 
-#### 📊 Whole-profile methylation plot (2D / 3D)
+#### 4. 📊Whole-profile methylation plot (2D / 3D)
 This script draws whole-profile DNA methylation curves across contexts (e.g., CG/CHG/CHH) in either:
   * 2D: one panel per context (stacked vertically)
   * 3D: pseudo-3D layered panels (offset axes per context)
@@ -483,7 +483,7 @@ python script/13_plot_methylation_profile_2d3d.py \
 </div>
 
 
-### 2. Signal vs. Expression Heatmap
+### 5. Signal vs. Expression Heatmap
 Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density. 11_plot_histone_vs_expr_heatmap.py generates a “histone/ATAC signal vs expression-binned” global trend heatmap.It loads *_tss_matrix.tsv / *_gene_profile_matrix.tsv / *_tes_matrix.tsv matrices produced by omicscanvas_bam_to_gene_matrices.py,integrates an expression table (e.g., FPKM/TPM) to rank genes, splits them into non-expressed and expressed bins,and aggregates signals (e.g., mean) within each bin to produce the heatmap.
 
 
@@ -603,7 +603,7 @@ python 11_plot_histone_vs_expr_heatmap.py \
   </tr>
 </table>
 
-### 3. Mehtylation vs. Expression Heatmap
+#### 6. Mehtylation vs. Expression Heatmap
 14_plot_meth_vs_expr_heatmap.py ranks genes by expression (FPKM/TPM/Counts), bins them, then computes methylation ratio sum(me)/sum(al) for each expression bin along a merged gene profile (start/body/end concatenated) and outputs a heatmap PDF. 
 
 ##### Required inputs
@@ -691,7 +691,7 @@ python script/14_plot_meth_vs_expr_heatmap.py \
 </table>
 
 
-### 3. Clustering Analysis
+#### 7. Clustering Analysis
 Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.
 
 ```bash
