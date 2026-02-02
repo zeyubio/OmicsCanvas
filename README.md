@@ -603,17 +603,63 @@ python 11_plot_histone_vs_expr_heatmap.py \
   </tr>
 </table>
 
+### 3. Mehtylation vs. Expression Heatmap
+14_plot_meth_vs_expr_heatmap.py ranks genes by expression (FPKM/TPM/Counts), bins them, then computes methylation ratio sum(me)/sum(al) for each expression bin along a merged gene profile (start/body/end concatenated) and outputs a heatmap PDF. 
+
+##### Required inputs
+  (1) Three methylation segment tables under --meth-dir (built from --sample, --cx, and suffixes):
+  * <meth_dir>/<sample>_<CX>_upstream_bins50.tsv
+  * <meth_dir>/<sample>_<CX>_body_bins100.tsv
+  * <meth_dir>/<sample>_<CX>_downstream_bins50.tsv
+  Each file must contain at least: name, bin/po, me, al (the script also tolerates your common index_col=0 format). 
+  (2) Expression table (TSV) via --FPKM/TPM: row index must be gene IDs; --fpkm-cols selects columns (0-based, excluding the index) to average. (consistent with Signal vs. Expression Heatmap)
+  If methylation genes and expression genes have no overlap, the script will error out.
+
+##### Required Parameters (Key points)
+
+--sample (required): sample ID used to build methylation filenames 
+--cx (required): methylation context (CG/CHG/CHH) 
+--meth-dir: methylation segment directory (default gene/) 
+--fpkm (required): expression table path 
+--fpkm-cols: expression columns to average 
+--none-bins, --exp-bins: numbers of bins (controls heatmap rows) 
+--out-prefix: output prefix (optional; defaults to --sample) 
+Output is always:
+<out-prefix>_<sample>_<CX>_meth_vs_expr_heatmap.pdf
+
+```bash
+python script/14_plot_meth_vs_expr_heatmap.py \
+  --sample one \
+  --cx CG \
+  --meth-dir CX_gene \
+  --fpkm FPKM.txt \
+  --fpkm-cols 0,1 \
+  --none-bins 10 \
+  --exp-bins 90 \
+  --distance 2000 \
+  --scale-mode ratio \
+  --cmap RdBu_r \
+  --out-prefix one --allow-unequal-segments
+```
 
 ### 3. Clustering Analysis
 Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.
 
 ```bash
-
 python scripts/12_plot_histone_cluster_pipeline.py \
-  --matrix-dir matrices \
-  --in-group "Sample_H3K4me3;Sample_H3K27me3" \
-  --k 4 \
-  --out-prefix results/Clustering_Analysis
+  --matrix-dir caculate_matrix --in-group "one_H3K4me1,two_H3K4me1;one_H3K4me3,two_H3K4me3" \
+  --in-names "one,two;one,two" \
+  --fpkm out_DE/matrices/merged_FPKM.tsv \
+  --expr-cols "one=0,1,2;two=3,4,5" \
+  --cluster-region gene \
+  --plot-regions TSS,gene,TES \
+  --k 8 \
+  --vmin -2 \
+  --vmax 2 \
+  --out-prefix GBR_histone \
+  --in-ylabels "H3K4me1,H3K4me3" \
+  --panel-figsize "15,15" \
+  --outdir out_histone_cluster \
 ```
 
 
