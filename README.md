@@ -741,7 +741,7 @@ Use K-means clustering to identify distinct chromatin states or regulatory patte
 
 ```bash
 # Example A: one condition (all samples labeled as "one")
-python 12_plot_histone_cluster_pipeline_clustersep.py \
+python scripts/12_plot_histone_cluster_pipeline_clustersep.py \
   --matrix-dir caculate_matrix \
   --in-group "SRR8742377;SRR8742376;SRR8742373;SRR8742374;SRR8742375;SRR8742441" \
   --in-names "leaf;leaf;leaf;leaf;leaf;leaf" \
