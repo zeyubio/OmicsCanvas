@@ -741,21 +741,23 @@ Use K-means clustering to identify distinct chromatin states or regulatory patte
 
 ```bash
 # Example A: one condition (all samples labeled as "one")
-python 12_plot_histone_cluster_pipeline.py \
+python 12_plot_histone_cluster_pipeline_clustersep.py \
   --matrix-dir caculate_matrix \
-  --in-group "SRR8742373,SRR8742374,SRR8742375;SRR8742376,SRR8742379,SRR8742441" \
-  --in-names "one,one,one;one,one,one" \
-  --in-ylabels "hitone1,histone2" \
+  --in-group "SRR8742377;SRR8742376;SRR8742373;SRR8742374;SRR8742375;SRR8742441" \
+  --in-names "leaf;leaf;leaf;leaf;leaf;leaf" \
   --fpkm FPKM.txt \
-  --expr-cols "one=0,1" \
-  --cluster-region gene \
-  --plot-regions TSS,gene,TES \
+  --expr-cols "leaf=0,1" \
+  --in-ylabels "H3K4me1,H3K4me3,H3K27me3,H3K36me3,H3K56ac,ATAC" \
   --k 8 \
-  --vmin -2 --vmax 2 \
-  --outdir out_histone_cluster \
-  --out-prefix GBR_histone
+  --isoform-suffix "" \
+  --panel-cell-width  3 \
+  --panel-cell-height 15 \
+  --expr-ylim "0,60" \
+  --cmap RdYlBu_r \
+  --outdir cluster_heatmap \
 ```
-
+ 所有结果都会生成在cluster_heatmap里，首先生成一个压缩的记录所有热图信息的文件以及一个文件分类的标签，histone_cluster_cluster_region-gene_k8_labels.tsv和histone_cluster_feature_matrix_gene_zscore.tsv.gz
+ 并生成一个figure文件夹，在这个文件夹内会产生一个聚类的基因表达的箱线图和每个类别聚类的热图以及每个类别的折线图，同时还会提供给用户一个没有任何标签的聚类热图的png图，方便修改，因为PDF文件太大，所以这里生成png
 
 
 ```bash
