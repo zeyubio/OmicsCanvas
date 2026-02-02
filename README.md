@@ -756,8 +756,88 @@ python 12_plot_histone_cluster_pipeline_clustersep.py \
   --cmap RdYlBu_r \
   --outdir cluster_heatmap \
 ```
- 所有结果都会生成在cluster_heatmap里，首先生成一个压缩的记录所有热图信息的文件以及一个文件分类的标签，histone_cluster_cluster_region-gene_k8_labels.tsv和histone_cluster_feature_matrix_gene_zscore.tsv.gz
- 并生成一个figure文件夹，在这个文件夹内会产生一个聚类的基因表达的箱线图和每个类别聚类的热图以及每个类别的折线图，同时还会提供给用户一个没有任何标签的聚类热图的png图，方便修改，因为PDF文件太大，所以这里生成png
+
+#### All outputs will be written to the directory specified by --outdir (e.g., cluster_heatmap/). The pipeline first generates two core tables that record the clustering results and the clustering feature matrix:
+
+  1) Cluster label file (cluster labels)
+  <out-prefix>_cluster_region-<cluster-region>_k<k>_labels.tsv
+  Example: histone_cluster_cluster_region-gene_k8_labels.tsv
+  This table maps each gene (or transcript) to a cluster ID (0 ~ k-1). It is used for downstream analyses such as selecting genes from a specific cluster, performing enrichment analysis, or any   further statistics.
+
+  2) Feature matrix used for clustering (compressed)
+  <out-prefix>_feature_matrix_<cluster-region>_zscore.tsv.gz
+  Example: histone_cluster_feature_matrix_gene_zscore.tsv.gz
+  This is the input feature matrix for K-means: for the selected cluster-region, signals are z-scored per gene (row-wise normalization), then bins from all tracks are concatenated into a single matrix and saved in a gzipped TSV. This file is useful for full reproducibility, trying alternative clustering methods, or exploratory analyses such as PCA/UMAP.
+
+  In addition, a figures/ folder will be created under --outdir. It contains the main visualizations:
+
+  - Expression boxplots (PDF)
+    <out-prefix>_cluster_expr_boxplot_k<k>.pdf
+    Compares expression distributions across clusters (and across your defined conditions/groups), helping interpret each cluster as a potential regulatory/chromatin state.
+
+  - Cluster-averaged profiles (PDF, per region)
+    <out-prefix>_<region>_cluster_profiles_k<k>.pdf
+    Example: histone_cluster_gene_cluster_profiles_k8.pdf
+    For each cluster, the script computes the mean signal profile across genes and plots line profiles for each track, making cluster patterns easy to interpret (e.g., TSS-enriched, gene-body-enriched, TES-enriched).
+
+  - Cluster panel heatmaps (PNG, per region; two versions)
+    *_panel_heatmaps_annot_k<k>.png  : annotated (titles/axes/boundary lines), ready for presentation
+    *_panel_heatmaps_clean_k<k>.png  : clean (no labels), convenient for post-editing and figure layout
+
+    PNG is used instead of PDF because panel heatmaps can become extremely large in PDF format when gene number and track number are high; PNG is lighter and more practical for sharing and editing.
+
+  - (Optional) Single-track heatmaps (PNG)
+    figures/single_tracks/<region>/{annot,clean}/*.png
+    One heatmap per track, also provided in both annotated and clean styles, useful for supplementary figures or focused comparisons.
+
+<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
+      <br>
+      <p><i>Sample 1: leaf TSS cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
+      <br>
+      <p><i>Sample 2: H3K4me1 H3K4me3 Genebody cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
+      <br>
+      <p><i>Sample 3: H3K4me1 H3K4me3 TES cluster heatmap Signal</i></p>
+    </td>
+  </tr>
+</table>
+
+
+<table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_TSS.png" width="100%">
+      <br>
+      <p><i>Sample 1: H3K4me1 H3K4me3 TSS cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_genebody.png" width="100%">
+      <br>
+      <p><i>Sample 2: H3K4me1 H3K4me3 Genebody cluster heatmap Signal</i></p>
+    </td>
+    <td style="border: none; width: 33%;">
+      <img src="./images/fig3_cluster_lineplot_TES.png" width="100%">
+      <br>
+      <p><i>Sample 3: H3K4me1 H3K4me3 TES cluster heatmap Signal</i></p>
+    </td>
+  </tr>
+</table>
+
+
+<div align="center">
+  <img src="./images/fig3_cluster_boxplot.png" width="600px">
+  <p><b>Figure: Gene Expression Distribution Across Clusters</b><br>
+  <i>Boxplots showing the TPM/FPKM expression levels for each identified K-means cluster, highlighting the correlation between epigenetic signals and transcriptional activity.</i></p>
+</div>
+
 
 
 ```bash
