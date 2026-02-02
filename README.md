@@ -484,8 +484,51 @@ python script/13_plot_methylation_profile_2d3d.py \
 
 
 ### 2. Signal vs. Expression Heatmap
-Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density.
+Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density. 11_plot_histone_vs_expr_heatmap.py generates a “histone/ATAC signal vs expression-binned” global trend heatmap.It loads *_tss_matrix.tsv / *_gene_profile_matrix.tsv / *_tes_matrix.tsv matrices produced by omicscanvas_bam_to_gene_matrices.py,integrates an expression table (e.g., FPKM/TPM) to rank genes, splits them into non-expressed and expressed bins,and aggregates signals (e.g., mean) within each bin to produce the heatmap.
 
+
+##### Input Preparation
+------------------------------------------------------------
+By default, the script reads matrices using the standard suffix naming:
+  --matrix-dir: Matrix directory
+  *_tss_matrix.tsv
+  *_gene_profile_matrix.tsv
+  *_tes_matrix.tsv
+
+So your --matrix-dir typically contains files like:
+
+  SRR8742373_gene_profile_matrix.tsv
+  SRR8742373_tss_matrix.tsv
+  SRR8742373_tes_matrix.tsv
+  ... (same pattern for other tracks)
+
+  If you are using legacy suffix naming, you can override them with:
+    --suffix-tss / --suffix-gene / --suffix-tes
+
+  --expr: Expression table (TSV)
+  The expression file must have:
+  - The first column as gene ID (used as the index)
+  - Subsequent columns as expression values
+
+  Use --expr-cols to specify which columns are used to compute the mean expression
+  (0-based indexing, counting columns AFTER the gene ID index column).
+------------------------------------------------------------
+
+##### Required Parameters (Key points)
+------------------------------------------------------------
+- --matrix-dir: Matrix directory (required)
+- --tracks: Track(s) to plot (required; pay attention to the input format)
+- --gene-types: Region type to plot: gene / TSS / TES (default: gene)
+- --expr: Expression TSV file (required)
+- --expr-cols: Expression columns (default: 0,1,2; here you use: 0,1)
+- --out-prefix / --outdir / --out-format: Output filename prefix, output directory, and output format (pdf/png)
+
+Other commonly used (optional) parameters:
+- --none-bins / --exp-bins: Number of bins for non-expressed vs expressed genes
+- --distance: Upstream/downstream window size used when building the matrices
+- --cmap: Colormap for the heatmap
+- --scale-mode / --quantiles: How to scale values (e.g., quantile clipping)
+------------------------------------------------------------
 
 ```bash
 
