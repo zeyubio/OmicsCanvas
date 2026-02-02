@@ -793,19 +793,19 @@ python 12_plot_histone_cluster_pipeline_clustersep.py \
 <table style="width: 100%; text-align: center; border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none; width: 33%;">
-      <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
+      <img src="./images/fig7_histone_cluster_TSS_panel_heatmaps_annot_k8.png" width="100%">
       <br>
       <p><i>Sample 1: leaf TSS cluster heatmap Signal</i></p>
     </td>
     <td style="border: none; width: 33%;">
       <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
       <br>
-      <p><i>Sample 2: H3K4me1 H3K4me3 Genebody cluster heatmap Signal</i></p>
+      <p><i>Sample 2: leaf Genebody cluster heatmap Signal</i></p>
     </td>
     <td style="border: none; width: 33%;">
-      <img src="./images/fig7_histone_cluster_gene_panel_heatmaps_annot_k8_cropped.png" width="100%">
+      <img src="./images/fig7_histone_cluster_TES_panel_heatmaps_annot_k8.png" width="100%">
       <br>
-      <p><i>Sample 3: H3K4me1 H3K4me3 TES cluster heatmap Signal</i></p>
+      <p><i>Sample 3: leaf TES cluster heatmap Signal</i></p>
     </td>
   </tr>
 </table>
