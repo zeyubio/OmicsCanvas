@@ -66,6 +66,64 @@ pip install -r requirements.txt
 python -m omicscanvas_gui
 ```
 
+---
+
+## 3. Workflow
+
+### 3.1 Data Prepare (required)
+Prepare gene BED / gene length tables and methylation inputs.
+
+- `01_prepare_gff_to_bed_genes_length.py` — GFF3 → BED6 + CDS/exon length table  
+- `02_prepare_cx_context_split.py` — split Bismark CX into CG/CHG/CHH  
+- `03_prepare_cx_replicate_merge.py` — merge CX replicates (optional)  
+- `04_prepare_extract_gene_methylation.py` — extract per-gene methylation TSVs (for single-gene plots)
+
+### 3.2 Calculate Matrix (required)
+Generate gene-centric matrices used by downstream plotting and clustering.
+
+- `05_compute_bam_to_gene_matrices.py` — BAM → gene matrices (TSS / gene body / TES)  
+- `06_compute_cx_gene_matrix.py` — CX → methylation matrices (TSS / gene body / TES)  
+- `07_compute_bam_to_fpkm.py` — BAM → expression quantification (counts/FPKM/TPM)
+
+### 3.3 Downstream modules (independent after matrices are ready)
+- **RNA / DE**: `08_compute_nb_de.py`, `09_compute_merge_expr_pairwise_de.py`
+- **Genome-wide circos**: `10_plot_genome_circos.py`
+- **Whole profile**: `11_plot_whole_profile_2d3d.py`
+- **Heatmap / clustering**: `12_plot_histone_vs_expr_heatmap.py`, `13_plot_histone_cluster_pipline.py`
+- **Methylation correlation / integration**: `14_methylation_bin_correlation_triangle.py`, `15_plot_methylation_profile_2d3d.py`, `16_plot_meth_vs_expr_heatmap.py`
+- **Single-gene (with MACS2 peaks shading)**: `17_plot_gene_tracks_2d3d_peaks.py`, `18_plot_gene_circle_plot_peaks.py`
+- **GO enrichment**: `19_omicscanvas_go_enrich.py`
+
+---
+
+## 4. Script index
+
+> Note: the repository may use `scripts/` (or `script/`) as the folder name. Replace paths accordingly.
+
+| ID | Script | Category | Main purpose |
+|---:|---|---|---|
+| 01 | `01_prepare_gff_to_bed_genes_length.py` | Data Prepare | GFF3 → gene BED + CDS/exon length table |
+| 02 | `02_prepare_cx_context_split.py` | Data Prepare | Split CX report into CG/CHG/CHH context files |
+| 03 | `03_prepare_cx_replicate_merge.py` | Data Prepare | Merge CX replicates into a consensus CX |
+| 04 | `04_prepare_extract_gene_methylation.py` | Data Prepare | Extract per-gene methylation TSVs (±distance window) |
+| 05 | `05_compute_bam_to_gene_matrices.py` | Calculate Matrix | BAM → gene-centric matrices (TSS/body/TES) |
+| 06 | `06_compute_cx_gene_matrix.py` | Calculate Matrix | CX → methylation matrices (TSS/body/TES) |
+| 07 | `07_compute_bam_to_fpkm.py` | Calculate Matrix | Quantify expression from BAM (counts/FPKM/TPM) |
+| 08 | `08_compute_nb_de.py` | RNA Analysis | Negative-binomial DE (CLI) |
+| 09 | `09_compute_merge_expr_pairwise_de.py` | RNA Analysis | Merge expression + pairwise DE summary |
+| 10 | `10_plot_genome_circos.py` | Circos Plot | Genome-wide circos plot (CX + BAM + RNA) |
+| 11 | `11_plot_whole_profile_2d3d.py` | ChIP-seq Analysis | Genome-wide meta-profile (2D/3D) |
+| 12 | `12_plot_histone_vs_expr_heatmap.py` | Heatmap | Track-vs-expression heatmap |
+| 13 | `13_plot_histone_cluster_pipline.py` | Heatmap & Clustering | Multi-track clustering + heatmap + profiles |
+| 14 | `14_methylation_bin_correlation_triangle.py` | Methylation Analysis | Binned methylation correlation triangle plot |
+| 15 | `15_plot_methylation_profile_2d3d.py` | Methylation Analysis | Methylation meta-profile (2D/3D) |
+| 16 | `16_plot_meth_vs_expr_heatmap.py` | Methylation Analysis | Methylation vs expression heatmap |
+| 17 | `17_plot_gene_tracks_2d3d_peaks.py` | Single-gene | Single-gene 2D/3D tracks + MACS2 peaks shading |
+| 18 | `18_plot_gene_circle_plot_peaks.py` | Single-gene | Single-gene circle plot + peaks shading |
+| 19 | `19_omicscanvas_go_enrich.py` | RNA/Enrichment | GO enrichment + bubble plot |
+
+---
+
 
 ## 🚀 Usage & Workflow
 The OmicsCanvas workflow consists of three main stages: Preparation, Matrix Calculation, and Visualization.
