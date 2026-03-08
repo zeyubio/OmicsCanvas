@@ -90,7 +90,7 @@ Generate gene-centric matrices used by downstream plotting and clustering.
 - **Genome-wide circos**: `10_plot_genome_circos.py`
 - **Whole profile**: `11_plot_whole_profile_2d3d.py`
 - **Heatmap / clustering**: `12_plot_histone_vs_expr_heatmap.py`, `13_plot_histone_cluster_pipline.py`
-- **Methylation correlation / integration**: `14_methylation_bin_correlation_triangle.py`, `15_plot_methylation_profile_2d3d.py`, `16_plot_meth_vs_expr_heatmap.py`
+- **Methylation correlation / Whole profile / heatmap**: `14_methylation_bin_correlation_triangle.py`, `15_plot_methylation_profile_2d3d.py`, `16_plot_meth_vs_expr_heatmap.py`
 - **Single-gene (with MACS2 peaks shading)**: `17_plot_gene_tracks_2d3d_peaks.py`, `18_plot_gene_circle_plot_peaks.py`
 - **GO enrichment**: `19_omicscanvas_go_enrich.py`
 
