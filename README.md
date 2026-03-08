@@ -42,9 +42,16 @@ pip install numpy pandas matplotlib scipy scikit-learn pysam seaborn
 
 ### Install (GUI)
 
-The GUI package is shipped with this repository and can be found at GUI/OmicsCanvas_GUI.zip (in the GitHub repo). Download and unzip it, then follow the requirements.txt inside to install dependencies and launch the GUI.
+### Install (GUI)
 
-The GUI has its own dependency set in `requirements.txt`. A clean environment is recommended.
+The OmicsCanvas GUI package is included in this repository at `GUI/OmicsCanvas_GUI.zip`.  
+The GUI is **cross-platform** and supports both **Windows** and **Linux** (desktop environments).
+
+**Step 1. Unzip**
+```bash
+unzip GUI/OmicsCanvas_GUI.zip
+cd OmicsCanvas_GUI
+```
 
 ```bash
 # Create a fresh environment (recommended)
