@@ -40,6 +40,34 @@ mamba install -c bioconda pysam -y
 pip install numpy pandas matplotlib scipy scikit-learn pysam seaborn
 ```
 
+### Install (GUI)
+
+The GUI has its own dependency set in `requirements.txt`. A clean environment is recommended.
+
+```bash
+# Create a fresh environment (recommended)
+mamba create -n omicscanvas_gui python=3.10 -y
+mamba activate omicscanvas_gui
+
+# Install GUI + runtime dependencies
+pip install -r requirements.txt
+```
+
+**Linux note (Qt xcb plugin)**  
+On some Linux distributions you may need additional system libraries for Qt. If you see an error about the `xcb` platform plugin, install:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y libxcb-cursor0
+```
+
+### Run (GUI)
+
+```bash
+python -m omicscanvas_gui
+```
+
 
 ## 🚀 Usage & Workflow
 The OmicsCanvas workflow consists of three main stages: Preparation, Matrix Calculation, and Visualization.
