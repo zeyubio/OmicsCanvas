@@ -54,8 +54,8 @@ cd OmicsCanvas_GUI
 ***Using conda (Windows/Linux)***
 
 ```bash
-conda create -n omicscanvas_env python=3.10 -y
-conda activate omicscanvas_env
+conda create -n omicscanvas python=3.10 -y
+conda activate omicscanvas
 pip install -r requirements.txt
 ```
 ### Run (GUI)
