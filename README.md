@@ -23,6 +23,8 @@ OmicsCanvas is a Python (v3.9) toolkit for integrated analysis of transcriptomic
 
 OmicsCanvas follows a minimal-dependency philosophy.
 
+**Installation (CLI)**
+
 ### Option A: Conda / Mamba (Recommended)
 ```bash
 # Create environment
