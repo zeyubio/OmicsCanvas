@@ -42,8 +42,6 @@ pip install numpy pandas matplotlib scipy scikit-learn pysam seaborn
 
 ### Install (GUI)
 
-### Install (GUI)
-
 The OmicsCanvas GUI package is included in this repository at `GUI/OmicsCanvas_GUI.zip`.  
 The GUI is **cross-platform** and supports both **Windows** and **Linux** (desktop environments).
 
@@ -52,25 +50,14 @@ The GUI is **cross-platform** and supports both **Windows** and **Linux** (deskt
 unzip GUI/OmicsCanvas_GUI.zip
 cd OmicsCanvas_GUI
 ```
+**Step 2. Create an environment (recommended)**
+***Using conda (Windows/Linux)***
 
 ```bash
-# Create a fresh environment (recommended)
-mamba create -n omicscanvas_gui python=3.10 -y
-mamba activate omicscanvas_gui
-
-# Install GUI + runtime dependencies
+conda create -n omicscanvas_env python=3.10 -y
+conda activate omicscanvas_env
 pip install -r requirements.txt
 ```
-
-**Linux note (Qt xcb plugin)**  
-On some Linux distributions you may need additional system libraries for Qt. If you see an error about the `xcb` platform plugin, install:
-
-```bash
-# Ubuntu/Debian
-sudo apt-get update
-sudo apt-get install -y libxcb-cursor0
-```
-
 ### Run (GUI)
 
 ```bash
