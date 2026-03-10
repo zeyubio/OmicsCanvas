@@ -483,7 +483,77 @@ python script/18_plot_gene_circle_plot_peaks.py \
 <div align="center"> 
   <h3>⭕ Single-Gene Circle Plot with Peaks</h3> <img src="./images/fig5_circle_gene_track_3D_with_peak.png" width="750px" alt="Single-Gene Circle Plot with Peaks"> 
   <p><i>A compact circular representation of multi-omics signals around a target gene, with optional MACS2 peak shading for highlighting enriched genomic intervals.</i></p>
-</div> `
+</div>
+
+#### Genome-wide Circos Plot
+
+**18_plot_genome_circos_bins_dir_v3_reset_v2_1.py** generates a genome-wide Circos-style visualization in a bin-based manner using **matplotlib only**. It integrates multiple omics layers, including **DNA methylation (CX)**, **ChIP/ATAC-seq BAM**, and **RNA-seq BAM**, into a unified circular view, enabling intuitive comparison of genome-scale signal distributions across chromosomes.
+
+This script supports an inner chromosome ideogram, optional gene tick marks from a BED file, customizable chromosome filtering, and flexible rendering styles for different omics tracks. It is particularly useful for displaying genome-wide epigenomic and transcriptomic landscapes in a compact and publication-ready format.
+
+##### Main features
+- Genome-wide circular visualization based on fixed-size genomic bins
+- Integration of:
+  - **CX methylation tracks** (`CG`, `CHG`, `CHH`)
+  - **BAM-based omics tracks** (e.g., ATAC-seq, histone modification ChIP-seq)
+  - **RNA-seq BAM tracks**
+- Optional **gene tick marks** on the innermost ideogram using `--gene-bed`
+- Flexible track rendering styles:
+  - `--cx-style` for methylation tracks
+  - `--omics-style` for BAM-based omics tracks
+  - `--rna-style` for RNA tracks
+- Adjustable chromosome spacing using `--gap-frac`
+- Adjustable y-axis label angle using `--ytick-angle-deg`
+- Publication-ready PDF/PNG output
+
+##### Basic requirements
+- A chromosome size source: `--fai` (or equivalent chromosome size file if supported)
+- Optional gene BED file for inner gene tick marks
+- CX methylation files
+- Sorted and indexed BAM files for omics and RNA tracks
+
+##### Example
+```bash
+python 18_plot_genome_circos_bins_dir_v3_reset_v2_1.py \
+  --cx-dir meth/meth_data \
+  --bam-dir bam \
+  --rna-dir bam \
+  --cx-tracks "SRR9321764_CG.CX,SRR9321764_CHG.CX,SRR9321764_CHH.CX" \
+  --cx-names "leaf_CG,leaf_CHG,leaf_CHH" \
+  --bam-tracks "SRR8742441.sorted.bam,SRR8742377.sorted.bam,SRR8742376.sorted.bam,SRR8742375.sorted.bam,SRR8742374.sorted.bam,SRR8742373.sorted.bam" \
+  --bam-names "ATAC,H3K4me1,H3K4me3,H3K56ac,H3K36me3,H3K27me3" \
+  --rna-tracks "SRR8742314.sorted.bam" \
+  --rna-names "leaf_RNA" \
+  --fai genome/Ptrichocarpa_210_v3.0.fa.fai \
+  --bin-size 100000 \
+  --chrom-prefix Chr \
+  --max-chroms 5 \
+  --gene-bed genome/Ptr_bed.txt \
+  --omics-style fill \
+  --rna-style fill \
+  --cx-style spokes \
+  --out-prefix results/poplar_reset \
+  --ytick-angle-deg 0 \
+  --gap-frac 0.1
+```
+<div align="center">
+  <h3>🌐 Genome-wide Multi-Omics Circos Plot</h3> <img src="./images/fig8_genome_circus.png" width="780px" alt="Genome-wide Circos Plot"> 
+  <p><i>A genome-wide Circos-style visualization integrating methylation, chromatin, and transcriptomic signals across chromosomes in a unified circular layout.</i></p> 
+</div>
+Output
+
+The figure will be saved using the prefix specified by --out-prefix, for example:
+  * results/poplar_reset.circos.pdf
+  * results/poplar_reset.circos.png (if PNG output is enabled in the script or converted afterward)
+**Notes**
+ * --bin-size controls the genomic resolution. Larger values are faster and are recommended for large genomes.
+ * --chrom-prefix and --max-chroms can be used to limit the displayed chromosomes.
+ * --gene-bed adds gene tick marks to the innermost circle.
+ * --omics-style fill and --rna-style fill are useful for displaying continuous signal intensity.
+ * --cx-style spokes provides a clear representation of methylation levels across bins.
+ * --gap-frac controls the spacing between chromosomes in the circular layout.
+ * --ytick-angle-deg controls the placement angle of y-axis labels for improved readability.
+
 
 #### 3. 📊Global Multi-Omics Profile (Pseudo-3D)
 The 11_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
