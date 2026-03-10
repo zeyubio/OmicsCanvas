@@ -352,10 +352,10 @@ python script/17_plot_gene_tracks_2d3d_peaks.py \
 
 #### 2. Circular Gene Plot
 ---
-Map genomic windows onto angular coordinates. Ideal for visualizing complex multi-layer regulation (e.g., Histone + Methylation) in a compact format.
+Map genomic windows onto angular coordinates. This representation is especially suitable for visualizing complex multi-layer regulation around a target gene, including BAM-based signals and optional methylation tracks in a compact circular layout
 
 #### Data preparation 
-04_prepare_extract_gene_methylation.py (extract per-gene methylation TSV from CX files),This script extracts per-cytosine methylation records (CG/CHG/CHH) from precomputed CX files within a gene-centered window (±distance) and writes TSV outputs. These TSVs can be directly used by downstream single-gene visualization (e.g., Script 16).
+04_prepare_extract_gene_methylation.py extracts per-cytosine methylation records (CG/CHG/CHH) from precomputed CX files within a gene-centered window (± distance) and writes TSV outputs. These TSV files can be directly used by downstream single-gene visualization.
 
 ##### What you need
   * GFF3 annotation (critical): the script matches your gene IDs using --feature-type (default: mRNA) and --attr-key (default: ID) from the GFF3 attributes.
@@ -396,7 +396,7 @@ python script/04_prepare_extract_gene_methylation.py \
 ```
 
 ##### Single-gene circle plot
-18_plot_gene_circle_plot_peaks.py (with/without methylation tracks),This script draws a single-gene circle plot, including BAM coverage tracks, and optionally CG/CHG/CHH methylation tracks.
+18_plot_gene_circle_plot_peaks.py draws a circular single-gene view with BAM coverage tracks and optional peak shading. It can also incorporate methylation tracks if methylation TSV files have been prepared in advance.
 
 ###### Minimal required parameters
   * --gff3: annotation file (must contain the given --gene ID; otherwise it errors: “gene id not found in gff3”) 
@@ -408,6 +408,10 @@ python script/04_prepare_extract_gene_methylation.py \
   * --bam-spec: use ; to separate groups (layers/modules), and , to list BAMs within a group.
   * --name-spec: must match the structure of --bam-spec exactly (the script checks counts and will error if mismatched).
 
+###### How to specify peak files
+
+--peak-spec follows the same grouping syntax as --bam-spec.
+For groups or tracks without peak files, leave entries empty.
 
 WITHOUT methylation
 ```bash
@@ -459,7 +463,27 @@ python script/16_plot_gene_circle_plot.py \
   </p>
 </div>
 
+Example: circle plot with peak shading
 
+```bash
+python script/18_plot_gene_circle_plot_peaks.py \
+  --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.006G061800.1.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --out Potri.006G061800.1.v3.0_gene_circle.pdf \
+  --circle-frame \
+  --peak-dir bam/macs2/ \
+  --peak-spec "SRR8742373_peaks.narrowPeak,SRR8742374_peaks.narrowPeak;SRR8742375_peaks.narrowPeak,SRR8742376_peaks.narrowPeak;," \
+  --peak-alpha 0.18
+```
+
+<div align="center"> 
+  <h3>⭕ Single-Gene Circle Plot with Peaks</h3> <img src="./images/fig5_circle_gene_track_3D_with_peak.png" width="750px" alt="Single-Gene Circle Plot with Peaks"> 
+  <p><i>A compact circular representation of multi-omics signals around a target gene, with optional MACS2 peak shading for highlighting enriched genomic intervals.</i></p>
+</div> `
 
 #### 3. 📊Global Multi-Omics Profile (Pseudo-3D)
 The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
