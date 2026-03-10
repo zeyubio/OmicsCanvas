@@ -239,7 +239,7 @@ It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverag
 
 
 ```bash
-python 15_plot_gene_tracks_2d3d.py \
+python 17_plot_gene_tracks_2d3d_peaks.py \
   --mode 2d \
   --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
   --gene Potri.006G061800.1.v3.0 \
@@ -260,7 +260,7 @@ python 15_plot_gene_tracks_2d3d.py \
 </div>
 
 ```bash
-python 15_plot_gene_tracks_2d3d.py \
+python 17_plot_gene_tracks_2d3d_peaks.py \
   --mode 3d \
   --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
   --gene Potri.006G061800.1.v3.0 \
