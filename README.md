@@ -66,7 +66,12 @@ pip install -r requirements.txt
 python -m omicscanvas_gui
 ```
 
+Detailed documentation and usage instructions are provided in the `docs/` directory.  
+These manual files are also integrated into the GUI, allowing users to open the corresponding documentation for each tool directly within the interface.  
+For a general overview of the workflow and tool descriptions, please refer to the files in `docs/`.
+
 ---
+
 
 ## 3. Workflow
 
