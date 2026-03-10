@@ -486,7 +486,7 @@ python script/18_plot_gene_circle_plot_peaks.py \
 </div> `
 
 #### 3. 📊Global Multi-Omics Profile (Pseudo-3D)
-The 10_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
+The 11_plot_whole_profile_2d3d.py script visualizes the genome-wide distribution of histone modifications or chromatin accessibility. It aggregates genes × bins matrices (via mean/median) into 1D meta-profiles and supports two sophisticated visualization modes:
   * 2D mode: vertically stacked panels;
   * 3D mode: stacked “fake-3D” panels in a column using x/y offsets and vertical dashed connectors.
 
@@ -530,7 +530,7 @@ The script uses a unique "Layout Language" for `--group`, `--names`, and `--ylab
 Ideal for visualizing "layers" of epigenetic information with depth.
 
 ```bash
-python scripts/10_plot_whole_profile_2d3d.py \
+python scripts/11_plot_whole_profile_2d3d.py \
   --mode 3d \
   --matrix-dir caculate_matrix \
   --group "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
@@ -550,7 +550,7 @@ python scripts/10_plot_whole_profile_2d3d.py \
 
 ###### 2D Standard Mode
 ```bash
-python scripts/10_plot_whole_profile_2d3d.py \
+python scripts/11_plot_whole_profile_2d3d.py \
   --mode 2d \
   --matrix-dir caculate_matrix \
   --group  "SRR8742373,SRR8742374;SRR8742375,SRR8742376;SRR8742377,SRR8742379" \
@@ -606,7 +606,7 @@ CX_gene/Mut_CHH_profile.tsv
 
 2D example
 ```bash
-python script/13_plot_methylation_profile_2d3d.py \
+python script/15_plot_methylation_profile_2d3d.py \
   --mode 2d \
   --meth-dir CX_gene \
   --contexts CG,CHG,CHH \
@@ -626,7 +626,7 @@ python script/13_plot_methylation_profile_2d3d.py \
 
 3D example
 ```bash
-python script/13_plot_methylation_profile_2d3d.py \
+python script/15_plot_methylation_profile_2d3d.py \
   --mode 3d \
   --meth-dir CX_gene \
   --contexts CG,CHG,CHH \
@@ -647,7 +647,7 @@ python script/13_plot_methylation_profile_2d3d.py \
 
 Multi-sample 3D
 ```bash
-python script/13_plot_methylation_profile_2d3d.py \
+python script/15_plot_methylation_profile_2d3d.py \
   --mode 3d \
   --meth-dir CX_gene \
   --contexts CG,CHG,CHH \
@@ -667,7 +667,7 @@ python script/13_plot_methylation_profile_2d3d.py \
 
 
 ### 5. Signal vs. Expression Heatmap
-Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density. 11_plot_histone_vs_expr_heatmap.py generates a “histone/ATAC signal vs expression-binned” global trend heatmap.It loads *_tss_matrix.tsv / *_gene_profile_matrix.tsv / *_tes_matrix.tsv matrices produced by omicscanvas_bam_to_gene_matrices.py,integrates an expression table (e.g., FPKM/TPM) to rank genes, splits them into non-expressed and expressed bins,and aggregates signals (e.g., mean) within each bin to produce the heatmap.
+Sort genes by expression level (High to Low) and visualize the corresponding epigenetic signal density. 12_plot_histone_vs_expr_heatmap.py generates a “histone/ATAC signal vs expression-binned” global trend heatmap.It loads *_tss_matrix.tsv / *_gene_profile_matrix.tsv / *_tes_matrix.tsv matrices produced by omicscanvas_bam_to_gene_matrices.py,integrates an expression table (e.g., FPKM/TPM) to rank genes, splits them into non-expressed and expressed bins,and aggregates signals (e.g., mean) within each bin to produce the heatmap.
 
 
 ##### Input Preparation
@@ -716,7 +716,7 @@ Other commonly used (optional) parameters:
 
 ```bash
 
-python 11_plot_histone_vs_expr_heatmap.py \
+python script/12_plot_histone_vs_expr_heatmap.py \
   --matrix-dir caculate_matrix \
   --tracks "SRR8742376" \
   --gene-types TSS \
@@ -732,7 +732,7 @@ python 11_plot_histone_vs_expr_heatmap.py \
   --out-prefix H3K4me3_TSS \
   --outdir out_heatmap
 
-python 11_plot_histone_vs_expr_heatmap.py \
+python script/12_plot_histone_vs_expr_heatmap.py \
   --matrix-dir caculate_matrix \
   --tracks "SRR8742376" \
   --gene-types gene \
@@ -748,7 +748,7 @@ python 11_plot_histone_vs_expr_heatmap.py \
   --out-prefix H3K4me3_gene \
   --outdir out_heatmap
 
-python 11_plot_histone_vs_expr_heatmap.py \
+python 1script/12_plot_histone_vs_expr_heatmap.py \
   --matrix-dir caculate_matrix \
   --tracks "SRR8742376" \
   --gene-types TES \
@@ -787,7 +787,7 @@ python 11_plot_histone_vs_expr_heatmap.py \
 </table>
 
 #### 6. Mehtylation vs. Expression Heatmap
-14_plot_meth_vs_expr_heatmap.py ranks genes by expression (FPKM/TPM/Counts), bins them, then computes methylation ratio sum(me)/sum(al) for each expression bin along a merged gene profile (start/body/end concatenated) and outputs a heatmap PDF. 
+16_plot_meth_vs_expr_heatmap.py ranks genes by expression (FPKM/TPM/Counts), bins them, then computes methylation ratio sum(me)/sum(al) for each expression bin along a merged gene profile (start/body/end concatenated) and outputs a heatmap PDF. 
 
 ##### Required inputs
   (1) Three methylation segment tables under --meth-dir (built from --sample, --cx, and suffixes):
@@ -811,7 +811,7 @@ Output is always:
 <out-prefix>_<sample>_<CX>_meth_vs_expr_heatmap.pdf
 
 ```bash
-python script/14_plot_meth_vs_expr_heatmap.py \
+python script/16_plot_meth_vs_expr_heatmap.py \
   --sample WT \
   --cx CG \
   --meth-dir CX_gene \
@@ -825,7 +825,7 @@ python script/14_plot_meth_vs_expr_heatmap.py \
   --out-prefix WT \
   --allow-unequal-segments
 
-python script/14_plot_meth_vs_expr_heatmap.py \
+python script/16_plot_meth_vs_expr_heatmap.py \
   --sample WT \
   --cx CHG \
   --meth-dir CX_gene \
@@ -839,7 +839,7 @@ python script/14_plot_meth_vs_expr_heatmap.py \
   --out-prefix WT \
   --allow-unequal-segments
 
-python script/14_plot_meth_vs_expr_heatmap.py \
+python script/16_plot_meth_vs_expr_heatmap.py \
   --sample WT \
   --cx CHH \
   --meth-dir CX_gene \
@@ -875,7 +875,7 @@ python script/14_plot_meth_vs_expr_heatmap.py \
 
 
 #### 7. Clustering Analysis
-Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.12_plot_histone_cluster_pipeline.py performs K-means clustering on gene-centric matrices (TSS/gene/TES) generated by omicscanvas_bam_to_gene_matrices.py, assigns each gene to a cluster, and produces a set of publication-ready outputs including panel heatmaps, cluster-averaged profiles, and expression distribution plots for each cluster. This section is designed to help you quickly discover epigenetic “states” (e.g., active, poised, repressed) and how they correlate with gene expression.
+Use K-means clustering to identify distinct chromatin states or regulatory patterns across samples.13_plot_histone_cluster_pipline.py performs K-means clustering on gene-centric matrices (TSS/gene/TES) generated by omicscanvas_bam_to_gene_matrices.py, assigns each gene to a cluster, and produces a set of publication-ready outputs including panel heatmaps, cluster-averaged profiles, and expression distribution plots for each cluster. This section is designed to help you quickly discover epigenetic “states” (e.g., active, poised, repressed) and how they correlate with gene expression.
 
 ---
 ##### Input Data
@@ -924,7 +924,7 @@ Use K-means clustering to identify distinct chromatin states or regulatory patte
 
 ```bash
 # Example A: one condition (all samples labeled as "one")
-python scripts/12_plot_histone_cluster_pipeline_clustersep.py \
+python scripts/13_plot_histone_cluster_pipline.py \
   --matrix-dir caculate_matrix \
   --in-group "SRR8742377;SRR8742376;SRR8742373;SRR8742374;SRR8742375;SRR8742441" \
   --in-names "leaf;leaf;leaf;leaf;leaf;leaf" \
@@ -1005,7 +1005,7 @@ python scripts/12_plot_histone_cluster_pipeline_clustersep.py \
 
 ```bash
 # Example B: two conditions (one vs two), two marks
-python scripts/12_plot_histone_cluster_pipeline.py \
+python scripts/13_plot_histone_cluster_pipline.py \
   --matrix-dir caculate_matrix --in-group "one_H3K4me1,two_H3K4me1;one_H3K4me3,two_H3K4me3" \
   --in-names "one,two;one,two" \
   --fpkm out_DE/matrices/merged_FPKM.tsv \
