@@ -210,32 +210,57 @@ python scripts/06_compute_cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir
 
 ---
 #### 1. Single Gene Visualization (Pseudo-3D)
-Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.17_plot_gene_tracks_2d3d_peaks.py plot a single target gene as stacked “tracks” using BAM coverage (ChIP/ATAC/RNA, etc.).
-It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverage across [gene_start - distance, gene_end + distance] and draws:
-  * --mode 2d : classic vertical stacked tracks
-  * --mode 3d : pseudo-3D stacked tracks (offset panels + vertical dashed connectors)
+
+Zoom in on specific candidate genes. OmicsCanvas provides single-gene visualization in both classic 2D stacked tracks and pseudo-3D layouts, enabling intuitive comparison of ChIP-seq, ATAC-seq, RNA-seq, and other BAM-based omics signals over a target locus.
+
+**17_plot_gene_tracks_2d3d_peaks.py** plots a single target gene as stacked “tracks” using BAM coverage (ChIP/ATAC/RNA, etc.), with optional peak shading from MACS2 `narrowPeak` files. The script reads gene structure from a GFF3 file (mRNA + exon/CDS/UTR), computes coverage across the region `[gene_start - distance, gene_end + distance]`, and supports two visualization modes:
+
+- `--mode 2d`: classic vertically stacked tracks  
+- `--mode 3d`: pseudo-3D stacked tracks with offset panels and vertical dashed connectors
 
 ##### Required / essential parameters (minimal set)
-  * --mode        : 2d or 3d
-  * --gff3        : genome annotation (GFF3)
-  * --gene        : target transcript/gene ID that MUST match the mRNA ID in GFF3 (otherwise it will error)
-  * --distance    : upstream/downstream window (bp)
-  * --bam-dir     : directory containing BAM files
-  * --bam-spec    : how BAM samples are grouped into layers/tracks
-  * --name-spec   : track labels; MUST have exactly the same structure as --bam-spec
-  * --fig-x/y     : figure size (inches)
-  * --out         : output file (.pdf/.svg recommended)
+
+- `--mode` : `2d` or `3d`
+- `--gff3` : genome annotation (GFF3)
+- `--gene` : target transcript/gene ID; this ID must match the `mRNA` ID in the GFF3 file
+- `--distance` : upstream/downstream window size (bp)
+- `--bam-dir` : directory containing BAM files
+- `--bam-spec` : BAM samples organized into layers/tracks
+- `--name-spec` : track labels; must have exactly the same structure as `--bam-spec`
+- `--fig-x`, `--fig-y` : figure size (inches)
+- `--out` : output file (`.pdf` / `.svg` recommended)
+
+##### Optional peak-related parameters
+
+- `--peak-dir` : directory containing MACS2 peak files
+- `--peak-spec` : peak files organized in the same group structure as `--bam-spec`
+- `--peak-alpha` : transparency of shaded peak regions
 
 ##### How to specify samples (MOST IMPORTANT)
---bam-spec and --name-spec use the same layer syntax:
-  * ';' separates groups (think: layers / rows)
-  * ',' separates tracks within the same group
 
-##### Example (3 layers, each layer has 2 tracks):
-  * --bam-spec  "A.bam,B.bam;C.bam,D.bam;E.bam,F.bam"
-  * --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2"
-##### ⚠️ If the number of groups or tracks per group does NOT match between bam-spec and name-spec, the script will raise an error.
+`--bam-spec` and `--name-spec` use the same layer syntax:
 
+- `;` separates groups (layers / rows)
+- `,` separates tracks within the same group
+
+##### Example (3 layers, each layer has 2 tracks)
+
+- `--bam-spec  "A.bam,B.bam;C.bam,D.bam;E.bam,F.bam"`
+- `--name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2"`
+
+⚠️ If the number of groups or tracks per group does not match between `--bam-spec` and `--name-spec`, the script will raise an error.
+
+##### How to specify peak files
+
+`--peak-spec` must follow the same `;` / `,` grouping logic as `--bam-spec`.  
+If a track has no corresponding peak file, leave that entry empty.
+
+Example:
+- `--peak-spec "A_peaks.narrowPeak,B_peaks.narrowPeak;C_peaks.narrowPeak,D_peaks.narrowPeak;,"`
+
+In this example, the first two groups have peak files, whereas the third group has no peak annotation.
+
+##### Example: 2D single-gene track
 
 
 ```bash
@@ -279,6 +304,51 @@ python script/17_plot_gene_tracks_2d3d_peaks.py \
   <p><i>Enhanced Pseudo-3D perspective allowing for intuitive comparison of stacked signal intensities and co-occupancy patterns.</i></p>
 
 </div>
+
+
+##### Example: 2D/3D single-gene track with peak shading
+
+```bash
+python script/17_plot_gene_tracks_2d3d_peaks.py \
+  --mode 2d \
+  --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.006G061800.1.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --fig-x 12 --fig-y 6 \
+  --out new_Potri.006G061800.1.v3.0_gene_track_2D.pdf \
+  --peak-dir bam/macs2/ \
+  --peak-spec "SRR8742373_peaks.narrowPeak,SRR8742374_peaks.narrowPeak;SRR8742375_peaks.narrowPeak,SRR8742376_peaks.narrowPeak;," \
+  --peak-alpha 0.18
+```
+<div align="center"> 
+  <h3>📍 Single-Gene Multi-Omics 2D Track with Peaks</h3> <img src="./images/fig4_gene_track_2D_with_peak.png" width="750px" alt="2D Gene Track with Peaks"> 
+  <p><i>Peak regions from MACS2 narrowPeak files are overlaid as semi-transparent shaded intervals, facilitating joint inspection of coverage profiles and peak calls.</i></p>
+</div>
+
+```bash
+python script/17_plot_gene_tracks_2d3d_peaks.py \
+  --mode 3d \
+  --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
+  --gene Potri.006G061800.1.v3.0 \
+  --distance 2000 \
+  --bam-dir bam \
+  --bam-spec "SRR8742373.sorted.bam,SRR8742374.sorted.bam;SRR8742375.sorted.bam,SRR8742376.sorted.bam;SRR8742314.sorted.bam,SRR8742315.sorted.bam" \
+  --name-spec "H3K27me3,H3K36me3;H3K56ac,H3K4me3;RNA_1,RNA_2" \
+  --fig-x 12 --fig-y 6 \
+  --out new_Potri.006G061800.1.v3.0_gene_track_3D.pdf \
+  --peak-dir bam/macs2/ \
+  --peak-spec "SRR8742373_peaks.narrowPeak,SRR8742374_peaks.narrowPeak;SRR8742375_peaks.narrowPeak,SRR8742376_peaks.narrowPeak;," \
+  --peak-alpha 0.18
+```
+<div align="center"> 
+  <h3>🧊 Single-Gene Multi-Omics 3D Track with Peaks</h3> <img src="./images/fig4_gene_track_3D_with_peak.png" width="750px" alt="3D Gene Track with Peaks">
+  <p><i>The pseudo-3D view combined with peak shading provides an intuitive display of layer-specific enrichment and regulatory co-localization.</i></p>
+</div>
+
+
 
 #### 2. Circular Gene Plot
 ---
