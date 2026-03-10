@@ -210,7 +210,7 @@ python scripts/06_compute_cx_gene_matrix.py -s sample -c CG -b gene.bed --cx-dir
 
 ---
 #### 1. Single Gene Visualization (Pseudo-3D)
-Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.15_plot_gene_tracks_2d3d.py plot a single target gene as stacked “tracks” using BAM coverage (ChIP/ATAC/RNA, etc.).
+Zoom in on specific candidate genes. Stack ChIP-seq and RNA-seq tracks in a 3D layout to show co-occupancy.17_plot_gene_tracks_2d3d_peaks.py plot a single target gene as stacked “tracks” using BAM coverage (ChIP/ATAC/RNA, etc.).
 It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverage across [gene_start - distance, gene_end + distance] and draws:
   * --mode 2d : classic vertical stacked tracks
   * --mode 3d : pseudo-3D stacked tracks (offset panels + vertical dashed connectors)
@@ -239,7 +239,7 @@ It reads gene structure from a GFF3 (mRNA + exon/CDS/UTR), then computes coverag
 
 
 ```bash
-python 17_plot_gene_tracks_2d3d_peaks.py \
+python script/17_plot_gene_tracks_2d3d_peaks.py \
   --mode 2d \
   --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
   --gene Potri.006G061800.1.v3.0 \
@@ -260,7 +260,7 @@ python 17_plot_gene_tracks_2d3d_peaks.py \
 </div>
 
 ```bash
-python 17_plot_gene_tracks_2d3d_peaks.py \
+python script/17_plot_gene_tracks_2d3d_peaks.py \
   --mode 3d \
   --gff3 genome/Ptrichocarpa_210_v3.0.gene.gff3 \
   --gene Potri.006G061800.1.v3.0 \
@@ -301,7 +301,7 @@ By default, outputs go to --outdir single_gene/. For each (SRR/prefix × gene ×
 
 A:Single gene
 ```bash
-python 04_prepare_extract_gene_methylation.py \
+python script/04_prepare_extract_gene_methylation.py \
   -g Ptrichocarpa_210_v3.0.gene.gff3 \
   --cx-dir meth_data/ \
   --srr SRR8742373 \
@@ -310,7 +310,7 @@ python 04_prepare_extract_gene_methylation.py \
 
 B:Single sample + gene list
 ```bash
-python 04_prepare_extract_gene_methylation.py \
+python script/04_prepare_extract_gene_methylation.py \
   -g Ptrichocarpa_210_v3.0.gene.gff3 \
   --cx-dir meth_data/ \
   --srr SRR8742373 \
@@ -318,7 +318,7 @@ python 04_prepare_extract_gene_methylation.py \
 ```
 C Multiple samples in one run
 ```bash
-python 04_prepare_extract_gene_methylation.py \
+python script/04_prepare_extract_gene_methylation.py \
   -g Ptrichocarpa_210_v3.0.gene.gff3 \
   --cx-dir meth_data/ \
   --srr SRR8742373,SRR8742374,SRR8742375 \
@@ -326,7 +326,7 @@ python 04_prepare_extract_gene_methylation.py \
 ```
 
 ##### Single-gene circle plot
-16_plot_gene_circle_plot_ipynbmethod_groupylim_methfix.py (with/without methylation tracks),This script draws a single-gene circle plot, including BAM coverage tracks, and optionally CG/CHG/CHH methylation tracks.
+18_plot_gene_circle_plot_peaks.py (with/without methylation tracks),This script draws a single-gene circle plot, including BAM coverage tracks, and optionally CG/CHG/CHH methylation tracks.
 
 ###### Minimal required parameters
   * --gff3: annotation file (must contain the given --gene ID; otherwise it errors: “gene id not found in gff3”) 
@@ -341,7 +341,7 @@ python 04_prepare_extract_gene_methylation.py \
 
 WITHOUT methylation
 ```bash
-python script/python 16_plot_gene_circle_plot.py \
+python script/18_plot_gene_circle_plot_peaks.py \
   --gff3 Ptrichocarpa_210_v3.0.gene.gff3 \
   --gene Potri.006G061800.1.v3.0 \
   --distance 2000 \
