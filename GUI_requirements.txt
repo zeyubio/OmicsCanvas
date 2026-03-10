@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+scikit-learn
+statsmodels
+pysam
+PySide6
+PySide6-Fluent-Widgets
